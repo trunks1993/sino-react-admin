@@ -1,10 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-10 06:05:36
- * @LastEditTime: 2022-04-10 19:01:49
+ * @LastEditTime: 2022-04-11 11:04:22
  */
+import { Response, Request } from 'express';
+
 export default {
-  'POST /baseApi/syss/loginss': (req, res) => {
+  'POST /baseApi/syss': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '0',
@@ -18,7 +20,7 @@ export default {
       });
     }, 2000);
   },
-  'POST /baseApi/sys/getUser2': (req, res) => {
+  'POST /baseApi/sys/getUser2': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '0',
@@ -32,7 +34,7 @@ export default {
       });
     }, 2000);
   },
-  'POST /baseApi/sys/getUse1r': (req, res) => {
+  'POST /baseApi/sys/getUse1r': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '0',

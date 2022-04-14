@@ -1,12 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:20:57
- * @LastEditTime: 2022-04-10 05:26:15
+ * @LastEditTime: 2022-04-11 13:57:02
  */
 import React from 'react';
 import ReactDOMClient from 'react-dom/client';
 import App from './app';
-
+ 
 if (module && module.hot) {
   module.hot.accept();
 }

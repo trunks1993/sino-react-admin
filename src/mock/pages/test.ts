@@ -1,10 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-10 16:07:07
- * @LastEditTime: 2022-04-10 19:46:53
+ * @LastEditTime: 2022-04-11 11:55:35
  */
+import { Response, Request } from 'express';
+
 export default {
-  'POST /baseApi/sys/test6': (req, res) => {
+  'POST /baseApi/sys/test64': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '0',
@@ -18,7 +20,7 @@ export default {
       });
     }, 2000);
   },
-  'POST /baseApi/sys/tes1': (req, res) => {
+  'POST /baseApi/sys/yyyyyyy': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '0',

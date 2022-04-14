@@ -1,22 +1,25 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:44
- * @LastEditTime: 2022-04-10 18:57:47
+ * @LastEditTime: 2022-04-11 00:26:05
  */
+import Webpack from 'webpack';
 import path from 'path';
 import url from "url";
 import WebpackBar from 'webpackbar';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { ROOT_PATH, SERVER_HOST, SERVER_PORT } from './constant.js';
+
+import constant from './constant';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-const __filename = url.fileURLToPath(import.meta.url);
+// const __filename = url.fileURLToPath(import.meta.url);
+const { SERVER_HOST, SERVER_PORT, ROOT_PATH } = constant;
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const getCssLoaders = () => {
-  const cssLoaders = [
+  const cssLoaders: any[] = [
     isProd ? MiniCssExtractPlugin.loader : 'style-loader', 
     'css-loader'
   ]
@@ -97,4 +100,4 @@ export default {
       },
     }),
   ]
-}
+} as Webpack.Configuration

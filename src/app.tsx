@@ -1,21 +1,20 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-10 03:51:12
- * @LastEditTime: 2022-04-10 18:21:00
+ * @LastEditTime: 2022-04-12 01:53:33
  */
 import React, { useEffect } from 'react';
 import Test from '@/components/Test';
-import request from '@/utils/request';
+import axios from 'axios';
 
 export default () => {
   
   useEffect(() => {
-    request(`/baseApi/sys/getUser`, {
-      method: 'get',
-    }).then(res => {
-      console.log(res);
-    });
-  })
+    axios({
+      method: 'POST',
+      url: '/some/path'
+    })
+  }, [])
 
   return <Test />
 };
