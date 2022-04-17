@@ -1,79 +1,19 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:55
- * @LastEditTime: 2022-04-12 10:25:20
+ * @LastEditTime: 2022-04-18 02:32:18
  */
 import Webpack from "webpack";
-import fs from 'fs';
+import { join, resolve } from 'path';
 import Mock from 'mockjs';
 import md5 from 'js-md5';
 import { merge } from 'webpack-merge';
 import baseWebpackConfig from './config';
 import constant from './constant';
-import { createMiddleware } from './mock';
+import { createMiddleware } from 'umi-mock';
+import portfinder from 'portfinder';
 
 const { SERVER_HOST, SERVER_PORT, ROOT_PATH } = constant;
-
-// const createMock = (filename: string, filePath: string) => {
-//   // 
-//   if (filename) {
-//     // 清掉require缓存
-//     delete require.cache[require.resolve(`../mock/${filename}`)];
-//     const module = require(`../mock/${filename}`);
-//     const mockList = module.default;
-//     console.log('mockList', mockList);
-//     map(keys(mockList), muKey => {
-//       const arr = muKey.split(' ');
-//       const method = arr[0];
-//       const url = arr[1];
-//       Mock.mock(url, method, mockList[muKey]);
-//     })
-//   } else {
-//     const fileNameList = fs.readdirSync(filePath)
-//     map(fileNameList, value => {
-//       if (!value.includes('.')) {
-//         createMock('', `${filePath}\\${value}`);
-//       } else {
-//         const abUrl = filePath.split(ROOT_PATH + '\\');
-//         const module = require(`../${abUrl[1]}/${value}`);
-//         const mockList = module.default;
-//         map(keys(mockList), muKey => {
-//           const arr = muKey.split(' ');
-//           const method = arr[0];
-//           const url = arr[1];
-//           Mock.mock(url, method, mockList[muKey]);
-//         })
-//       }
-//     });
-//   }
-// };
-// createMock('', ROOT_PATH + '\\mock');
-
-// let timmer:any = null;
-// fs.watch(ROOT_PATH + '\\mock', { recursive: true }, (event, filename) => {
-//   clearTimeout(timmer);
-//   timmer = setTimeout(() => {
-//     // 判断filename是否可用且eventType是否为改变
-//     if (filename && event === 'change') {
-//       // 判断mock文件是否有修改
-//       const currentMd5 = md5(fs.readFileSync(ROOT_PATH + '\\mock' + '\\' + filename));
-//       const key = md5(filename);
-      
-//       let obj: {[propName: string]: string} = {};
-//       try {
-//         obj = JSON.parse(fs.readFileSync('./mock.json').toString());
-//       } catch {}
-
-//       // filename对应的持久化存储的hash值 与 当前文件发生变化转化的hash值没有改变的时候不触发mock更新
-//       if (obj[key] === currentMd5) return;
-
-//       // mock文件有修改时改变该文件对应的hash值重新持久化 并且调用Mock.mock;
-//       obj[key] = currentMd5;
-//       fs.writeFileSync('./mock.json', JSON.stringify(obj));
-//       createMock(filename, '');
-//     }
-//   }, 500);
-// })
 
 const config = merge(baseWebpackConfig, {
   // 指定构建环境
@@ -108,11 +48,17 @@ const config = merge(baseWebpackConfig, {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
-      // console.log('devServer.app.use', devServer.app);
-      createMiddleware({})(devServer.app);
-      // devServer.app.post('/some/path', function (req: any, res: any) {
-      //   res.json({ custom: 'response' });
-      // });
+      const { middleware } = createMiddleware({
+        cwd: ROOT_PATH,
+        config: {},
+        absPagesPath: join(ROOT_PATH, 'src/pages'),
+        absSrcPath: ROOT_PATH,
+        watch: true,
+        onError(e: any) {
+          console.log(e);
+        }
+      });
+      devServer.app.use(middleware);
     },
   }
 } as Webpack.Configuration);
