@@ -1,12 +1,10 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:55
- * @LastEditTime: 2022-04-18 02:32:18
+ * @LastEditTime: 2022-04-18 10:17:13
  */
 import Webpack from "webpack";
 import { join, resolve } from 'path';
-import Mock from 'mockjs';
-import md5 from 'js-md5';
 import { merge } from 'webpack-merge';
 import baseWebpackConfig from './config';
 import constant from './constant';
