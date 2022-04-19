@@ -1,9 +1,9 @@
 /*
  * @Author: wangzhijian
  * @Date: 2021-05-22 22:13:58
- * @LastEditTime: 2022-04-10 18:14:00
+ * @LastEditTime: 2022-04-19 22:15:46
  */
-import { extend } from 'umi-request';
+import { extend, ResponseInterceptor } from 'umi-request';
 
 // import { clientId, whiteUrls, clientSecret, INVALID_TOKEN, PATH_LOGIN, INVALID_STATISTIC_API_CODE } from '@/const';
 // import { getToken, removeToken } from './auth';
@@ -55,23 +55,13 @@ const request = extend({
 //   return draft;
 // });
 
-// request.interceptors.response.use(async response => {
-//   const res = await response.clone().json();
-//   const { data, code, msg, errCode, errMsg } = res;
-//   let { success } = res;
-//   if (code === INVALID_TOKEN) { // token失效
-//     removeToken();
-//     // history.push(`${PATH_LOGIN}?redirect=${encodeURIComponent(history.location.pathname + history.location.search)}`);
-//   }
 
-//   if (success !== undefined) {
-//     // if (!success) Message.error(msg);
-//     return [success, data];
-//   }
-//   success = errCode === INVALID_STATISTIC_API_CODE;
-//   if (!success) {
-//   }
-//   return [success, data];
-// });
+request.interceptors.response.use(async (response: Response): Promise<Response> => {
+  const res = await response.clone().json();
+  console.log('res', res);
+  const { code, data, msg } = res;
+  
+  return [code === 0, data, msg] as unknown as Response;
+});
 
 export default request;

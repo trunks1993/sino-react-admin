@@ -1,11 +1,11 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:31:38
- * @LastEditTime: 2022-04-19 01:04:53
+ * @LastEditTime: 2022-04-19 13:34:30
  */
 import request from '@/utils/request';
 
-interface LoginParams {
+export interface LoginParams {
   username: string,
   password: string,
 }

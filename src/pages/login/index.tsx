@@ -1,17 +1,25 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:04:20
- * @LastEditTime: 2022-04-19 01:10:36
+ * @LastEditTime: 2022-04-19 21:20:44
  */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from "react-redux";
+import { getLoginAction, getLogoutAction } from '@/store/login';
 
 export default () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'GET_POSTS', payload: {usename: 'admin', password: '123'} });
-  })
+  const handleLogout = () => {
+    dispatch(getLogoutAction());
+  }
+
+  const handleLogin = () => {
+    dispatch(getLoginAction({ username: 'admin', password: '123'}));
+  }
   
-  return <div>login</div> ;
+  return <div>
+    <button onClick={handleLogin}>登录</button>
+    <button onClick={handleLogout}>退出</button>
+  </div> ;
 }
