@@ -1,48 +1,15 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:20:39
- * @LastEditTime: 2022-04-19 22:25:01
+ * @LastEditTime: 2022-04-20 00:31:40
  */
 import { takeLatest, take, takeEvery, put, call, select, fork, all, cancel, cancelled } from "redux-saga/effects";
 import { login } from '@/service/login';
 import produce from 'immer';
 import { Task } from "redux-saga";
-import { LoginError, LoginParams, LoginResponse } from "@/models/login";
-
-const USER_LOGIN = "USER_LOGIN";
-const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
-const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
-
-const USER_LOGOUT = "USER_LOGOUT";
-
-interface LoginAction<T> {
-  type: typeof USER_LOGIN | typeof USER_LOGIN_SUCCESS | typeof USER_LOGIN_FAIL | typeof USER_LOGOUT;
-  payload: T;
-};
-
-interface LogoutAction {
-  type: typeof USER_LOGOUT;
-};
-
-export const getLoginAction = (payload: LoginParams): LoginAction<LoginParams> => ({
-  type: USER_LOGIN,
-  payload,
-});
-
-export const getLoginSuccessAction = (payload: LoginResponse): LoginAction<LoginResponse> => ({
-  type: USER_LOGIN_SUCCESS,
-  payload
-});
-
-export const getLoginFailAction = (payload: string): LoginAction<string> => ({
-  type: USER_LOGIN_FAIL,
-  payload
-});
-
-export const getLogoutAction = (): LogoutAction => ({
-  type: USER_LOGOUT
-});
-
+import { LoginError, LoginParams, LoginResponse, LoginActionReducer } from "@/models/login";
+import { Page, Response } from "@/models";
+import { getLoginFailAction, getLoginSuccessAction, LoginAction, LogoutAction, USER_LOGIN, USER_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOGOUT } from "./actions";
 interface LoginState extends LoginResponse {
   isFetching: Boolean;
   error: string;
@@ -54,7 +21,7 @@ const initialState: LoginState = {
   token: "",
 };
 
-const reducer = (state = initialState, action: LoginAction<LoginParams & LoginResponse & LoginError>) => produce(state, draft => {
+const reducer = (state = initialState, action: LoginAction<LoginActionReducer>) => produce(state, draft => {
   const { type, payload } = action;
   switch (type) {
     case USER_LOGIN:
@@ -71,12 +38,11 @@ const reducer = (state = initialState, action: LoginAction<LoginParams & LoginRe
   }
 });
 
-function* loginByUsername(data: LoginParams) {
+function* loginByUsername(params: LoginParams) {
   try {
-    const res: LoginResponse = yield call(login, data);
-    console.log(res);
-    yield put(getLoginSuccessAction(res));
-    return res.token;
+    const [success, data, msg]:Response<LoginResponse> = yield call(login, params);
+    
+    console.log(data.token)
   } catch (error) {
     yield put(getLoginFailAction(JSON.stringify(error)));
   } finally {

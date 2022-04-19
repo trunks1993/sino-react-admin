@@ -1,9 +1,9 @@
 /*
  * @Author: wangzhijian
  * @Date: 2021-05-22 22:13:58
- * @LastEditTime: 2022-04-19 22:15:46
+ * @LastEditTime: 2022-04-19 23:41:47
  */
-import { extend, ResponseInterceptor } from 'umi-request';
+import { extend } from 'umi-request';
 
 // import { clientId, whiteUrls, clientSecret, INVALID_TOKEN, PATH_LOGIN, INVALID_STATISTIC_API_CODE } from '@/const';
 // import { getToken, removeToken } from './auth';
@@ -55,13 +55,11 @@ const request = extend({
 //   return draft;
 // });
 
-
-request.interceptors.response.use(async (response: Response): Promise<Response> => {
+request.interceptors.response.use(async (response: Response): Promise<any> => {
   const res = await response.clone().json();
-  console.log('res', res);
   const { code, data, msg } = res;
   
-  return [code === 0, data, msg] as unknown as Response;
+  return [code === 0, data, msg];
 });
 
 export default request;

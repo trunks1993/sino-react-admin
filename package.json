@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/config.dev.ts",
     "start:mock": "cross-env NODE_ENV=development webpack-dev-server --config ./config/config.dev.ts",
-    "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts"
+    "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
+    "page": "ts-node ./scripts/page-generator.ts"
   },
   "browserslist": [
     ">0.2%",

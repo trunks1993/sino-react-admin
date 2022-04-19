@@ -3,11 +3,11 @@
   import { useDispatch } from "react-redux";
   import { getLoginAction, getLogoutAction } from '@/store/login/actions';
   
-  interface LoginProps {
+  interface NewPageProps {
     name: string;
   }
   
-  const Login: React.FC<LoginProps> = ({ name }) => {
+  const NewPage: React.FC<NewPageProps> = ({ name }) => {
     const dispatch = useDispatch();
   
     const handleLogout = () => {
@@ -24,5 +24,5 @@
     </div> ;
   }
   
-  export default Login;
+  export default NewPage;
   
