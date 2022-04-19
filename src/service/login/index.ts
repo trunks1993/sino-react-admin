@@ -1,14 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:31:38
- * @LastEditTime: 2022-04-19 13:34:30
+ * @LastEditTime: 2022-04-19 22:23:26
  */
+import { LoginParams } from '@/models/login';
 import request from '@/utils/request';
 
-export interface LoginParams {
-  username: string,
-  password: string,
-}
+
 /**
  * @description: 登录
  */

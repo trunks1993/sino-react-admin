@@ -1,27 +1,19 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:20:39
- * @LastEditTime: 2022-04-19 22:21:37
+ * @LastEditTime: 2022-04-19 22:25:01
  */
 import { takeLatest, take, takeEvery, put, call, select, fork, all, cancel, cancelled } from "redux-saga/effects";
 import { login } from '@/service/login';
-import { LoginParams } from '@/service/login';
 import produce from 'immer';
 import { Task } from "redux-saga";
+import { LoginError, LoginParams, LoginResponse } from "@/models/login";
 
 const USER_LOGIN = "USER_LOGIN";
 const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
 
 const USER_LOGOUT = "USER_LOGOUT";
-
-export interface LoginResponse {
-  token: string;
-}
-
-export interface LoginError {
-  error: string;
-}
 
 interface LoginAction<T> {
   type: typeof USER_LOGIN | typeof USER_LOGIN_SUCCESS | typeof USER_LOGIN_FAIL | typeof USER_LOGOUT;
