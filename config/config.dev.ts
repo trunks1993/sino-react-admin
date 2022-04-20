@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:55
- * @LastEditTime: 2022-04-18 10:17:13
+ * @LastEditTime: 2022-04-20 17:25:46
  */
 import Webpack from "webpack";
 import { join, resolve } from 'path';
@@ -58,6 +58,13 @@ const config = merge(baseWebpackConfig, {
       });
       devServer.app.use(middleware);
     },
+    proxy: {
+      '/api': {
+        target: process.env.MOCK ? `http://${SERVER_HOST}:${SERVER_PORT}` : 'http://192.168.100.246:31012',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' }
+      }
+    }
   }
 } as Webpack.Configuration);
 

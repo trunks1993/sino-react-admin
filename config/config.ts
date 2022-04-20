@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:44
- * @LastEditTime: 2022-04-11 00:26:05
+ * @LastEditTime: 2022-04-20 14:16:46
  */
 import Webpack from 'webpack';
 import path from 'path';
@@ -87,6 +87,9 @@ export default {
     ],
   },
   plugins: [
+    new Webpack.DefinePlugin({
+      'process.env.BASE_API': '"/api"',
+    }),
   	new HtmlWebpackPlugin({
       template: path.resolve(ROOT_PATH, './public/index.html'),
     }),

@@ -1,20 +1,20 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-20 00:42:02
- * @LastEditTime: 2022-04-20 01:45:10
+ * @LastEditTime: 2022-04-20 10:06:17
  */
 import { existsSync, writeFileSync, readdirSync } from 'fs';
 import  { join } from 'path';
 import mkdirp from 'mkdirp';
-// const { yParser } = require('@umijs/utils');
-// const getPackages = require('./utils/getPackages');
+import signale from 'signale';
 
 (async () => {
   // const args = yParser(process.argv);
   const [binPath, cwdPath, ...pageNames] = process.argv;
 
   if (!pageNames.length) {
-    pageNames.push('newPage');
+    // pageNames.push('newPage');
+    return signale.error('please type the page name.');
   }
 
   pageNames.map(async name => {

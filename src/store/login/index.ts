@@ -1,10 +1,10 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:20:39
- * @LastEditTime: 2022-04-20 00:31:40
+ * @LastEditTime: 2022-04-20 17:19:27
  */
 import { takeLatest, take, takeEvery, put, call, select, fork, all, cancel, cancelled } from "redux-saga/effects";
-import { login } from '@/service/login';
+import { login, test } from '@/service/login';
 import produce from 'immer';
 import { Task } from "redux-saga";
 import { LoginError, LoginParams, LoginResponse, LoginActionReducer } from "@/models/login";
@@ -28,29 +28,19 @@ const reducer = (state = initialState, action: LoginAction<LoginActionReducer>) 
       draft.isFetching = true;
       break;
     case USER_LOGIN_SUCCESS:
-      draft.token = payload.token;
+      draft.token = (payload as LoginResponse).token;
       draft.isFetching = false;
       break;
     case USER_LOGIN_FAIL:
-      draft.error = payload.error;
+      draft.error = (payload as LoginError).error;
       draft.isFetching = false;
       break;
   }
 });
 
 function* loginByUsername(params: LoginParams) {
-  try {
-    const [success, data, msg]:Response<LoginResponse> = yield call(login, params);
-    
-    console.log(data.token)
-  } catch (error) {
-    yield put(getLoginFailAction(JSON.stringify(error)));
-  } finally {
-    const isCancelled: boolean = yield cancelled();
-    if (isCancelled) {
-      
-    }
-  }
+  const [success, data]:Response<LoginResponse> = yield call(login, params);
+  console.log(success, data)
 }
 
 function* logout(data: LogoutAction) {

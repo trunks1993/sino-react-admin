@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 22:22:50
- * @LastEditTime: 2022-04-20 00:30:29
+ * @LastEditTime: 2022-04-20 13:55:01
  */
 export interface LoginParams {
   username: string;
@@ -15,4 +15,4 @@ export interface LoginError {
   error: string;
 }
 
-export type LoginActionReducer = LoginParams & LoginResponse & LoginError;
+export type LoginActionReducer = LoginParams | LoginResponse | LoginError;
