@@ -1,13 +1,13 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:20:57
- * @LastEditTime: 2022-04-19 00:07:14
+ * @LastEditTime: 2022-04-21 09:17:11
  */
 import React from 'react';
 import ReactDOMClient from 'react-dom/client';
 import store from "@/store";
 import { Provider } from "react-redux";
-import App from './app';
+import App from './router';
  
 if (module && module.hot) {
   module.hot.accept();

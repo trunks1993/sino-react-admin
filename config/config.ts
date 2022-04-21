@@ -12,6 +12,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import constant from './constant';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import RouterPlugin from '../packages/router-plugin';
 
 // const __filename = url.fileURLToPath(import.meta.url);
 const { SERVER_HOST, SERVER_PORT, ROOT_PATH } = constant;
@@ -102,5 +103,6 @@ export default {
         configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
       },
     }),
+    new RouterPlugin(),
   ]
 } as Webpack.Configuration

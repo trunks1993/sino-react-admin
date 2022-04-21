@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-20 09:22:05
- * @LastEditTime: 2022-04-20 18:58:04
+ * @LastEditTime: 2022-04-21 10:32:56
  */
   import React from 'react';
   import { useDispatch } from "react-redux";
@@ -31,7 +31,7 @@
       </div>
       <button onClick={handleLogin}>登录{name}</button>
       <button onClick={handleLogout}>退出</button>
-    </div> ;
+    </div>;
   }
   
   export default Login;
