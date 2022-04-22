@@ -9,19 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
     "page": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
-    "test": "lint-staged"
-  },
-  "lint-staged": {
-    "src/**/*.tsx": [
-      "eslint --ext .tsx,.ts --fix ./src",
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }  
+    "prepare": "husky install"
   },
   "browserslist": [
     ">0.2%",
@@ -58,8 +46,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "cz-customizable": "^6.3.0",
     "eslint": "^8.13.0",
     "eslint-plugin-react": "^7.29.4",
     "fork-ts-checker-webpack-plugin": "^7.2.3",
@@ -68,7 +54,6 @@
     "inquirer": "^8.2.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
-    "lint-staged": "^12.4.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.3",
