@@ -18,8 +18,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{tsx, ts, css}": [
-      "yarn lint",
+    "src/**/*.tsx": [
+      "eslint --ext .tsx,.ts --fix ./src",
       "git add"
     ]
   },
