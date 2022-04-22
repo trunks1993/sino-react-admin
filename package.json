@@ -11,6 +11,19 @@
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
     "prepare": "husky install"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{txs, ts, css}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -54,6 +67,7 @@
     "inquirer": "^8.2.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "lint-staged": "^12.4.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.3",
