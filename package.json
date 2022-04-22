@@ -8,19 +8,18 @@
     "start:mock": "cross-env NODE_ENV=development MOCK=ture webpack-dev-server --config ./config/config.dev.ts",
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
     "page": "ts-node ./scripts/page-generator.ts",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
     "prepare": "husky install"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn lint"
     }
   },
   "lint-staged": {
     "src/**/*.{txs, ts, css}": [
-      "prettier --write",
-      "eslint --fix",
+      "yarn lint",
       "git add"
     ]
   },
