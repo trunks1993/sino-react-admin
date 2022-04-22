@@ -1,18 +1,15 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:27:05
- * @LastEditTime: 2022-04-10 23:22:51
+ * @LastEditTime: 2022-04-23 00:14:08
  */
-import path from 'path';
 import { merge } from 'webpack-merge';
 import baseWebpackConfig from './config';
-import constant from './constant';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
-const { ROOT_PATH } = constant;
 
 const config = merge(baseWebpackConfig, {
   // 指定构建环境
@@ -27,7 +24,7 @@ const config = merge(baseWebpackConfig, {
   ],
   optimization: {
     minimize: true,
-    minimizer:[
+    minimizer: [
       new TerserPlugin({
         extractComments: false,
         parallel: 4,

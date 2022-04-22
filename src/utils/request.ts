@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2021-05-22 22:13:58
- * @LastEditTime: 2022-04-20 17:12:42
+ * @LastEditTime: 2022-04-23 00:26:52
  */
 import { extend } from 'umi-request';
 import { Base64 } from 'js-base64';
@@ -17,9 +17,9 @@ const errorHandler = (error: Error) => {
     // 清除token重新登录
     return;
   }
-  
+
   // 剩下的错误全部弹提示 并返回[false, undefined]
-  alert(error.message);
+  // alert(error.message);
 
   return Promise.resolve([false]);
 };
@@ -37,7 +37,7 @@ const request = extend({
 // 拦截器先于中间件执行
 request.interceptors.request.use((url, options) => {
   const draft = { url, options };
-  
+
   const isWhite = whiteUrls.includes(url); // 登录接口需要ClientId, 以此判断是否为登录接口
   const token = getToken();
 
@@ -51,19 +51,19 @@ request.interceptors.request.use((url, options) => {
   return draft;
 });
 
-request.interceptors.response.use(async (response: Response): Promise<any> => {
-  // 当res能成功解析到后台数据的时候 直接判断code是否为0， 
+request.interceptors.response.use(async(response: Response): Promise<any> => {
+  // 当res能成功解析到后台数据的时候 直接判断code是否为0，
   // 处理例外情况密码错误会返回400，但是res能解析到code data msg
-  const res = await response.clone().json().catch(e => {
-    // 504 等服务端无正确返回走这里 
+  const res = await response.clone().json().catch(() => {
+    // 504 等服务端无正确返回走这里
     // 但是500后端会正确返回解析res, 走下面
     throw new AppError(HTTP_ERROR, response.statusText);
   });
-  
+
   const { code, data, msg } = res;
 
   if (code !== HTTP_SUCCESS) throw new AppError(code2Message[code], msg);
-  
+
   return [code === HTTP_SUCCESS, data];
 
 });

@@ -5,7 +5,7 @@
  */
 import path from 'path';
 
-// 项目根路径 
+// 项目根路径
 const ROOT_PATH = path.resolve();
 
 // host

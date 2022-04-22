@@ -1,8 +1,10 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-10 03:16:30
- * @LastEditTime: 2022-04-10 19:01:08
+ * @LastEditTime: 2022-04-23 00:21:06
  */
 import React from 'react';
 
-export default () => <div>fa</div>;
+const Test = () => <div>Test</div>;
+
+export default Test;

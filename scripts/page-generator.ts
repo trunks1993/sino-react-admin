@@ -1,21 +1,19 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-20 00:42:02
- * @LastEditTime: 2022-04-20 10:06:17
+ * @LastEditTime: 2022-04-23 00:38:50
  */
 import { existsSync, writeFileSync, readdirSync } from 'fs';
 import writeNewRoute from './route-generator';
-import  { join } from 'path';
+import { join } from 'path';
 import mkdirp from 'mkdirp';
 import signale from 'signale';
 import inquirer from 'inquirer';
 import getPage from './temp/getPage';
 
-(async () => {
+(async() => {
   // const args = yParser(process.argv);
-  const [binPath, cwdPath, ...pageNames] = process.argv;
-
-  const module = readdirSync(join(__dirname, '../src/pages'))
+  const module = readdirSync(join(__dirname, '../src/pages'));
 
   const promptList = [
     {
@@ -25,19 +23,19 @@ import getPage from './temp/getPage';
       // default: "pageName" // 默认值
     },
     module.length > 0 ? {
-      type: "confirm",
-      message: "是否新增模块:",
-      name: "isNew",
+      type: 'confirm',
+      message: '是否新增模块:',
+      name: 'isNew',
     } : undefined,
     {
-      type: "list",
-      message: "选择模块:",
-      name: "moduleName",
+      type: 'list',
+      message: '选择模块:',
+      name: 'moduleName',
       choices: module.map(name => ({
         name,
       })),
       when: function(answers: any) {
-        return !answers.isNew && module.length > 0
+        return !answers.isNew && module.length > 0;
       }
     },
     {
@@ -45,7 +43,7 @@ import getPage from './temp/getPage';
       message: '请输入模块名称:',
       name: 'moduleName',
       when: function(answers: any) {
-        return answers.isNew === undefined || answers.isNew
+        return answers.isNew === undefined || answers.isNew;
       }
     }
   ];
@@ -80,9 +78,9 @@ import getPage from './temp/getPage';
     path: name,
     parent: '/' + moduleName,
     element: '',
-  }
-  
+  };
+
   // 更新路由
-  writeNewRoute(newRoute, join(__dirname, '../src/_router.config.tsx'), '');
+  writeNewRoute(newRoute, join(__dirname, '../src/_router.config.tsx'));
 
 })();

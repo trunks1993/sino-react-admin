@@ -1,16 +1,15 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-21 08:58:26
- * @LastEditTime: 2022-04-21 09:42:06
+ * @LastEditTime: 2022-04-23 00:27:52
  */
 import React from 'react';
 import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
 import Layout from '@/frame/layout';
 import Login from '@/frame/login';
 import Module1Page1 from '@/pages/module1/page1';
-import Module1Page2 from '@/pages/module1/page2';
 
-const App = () => {
+const Routes = () => {
   const element = useRoutes([
     {
       path: '/',
@@ -24,10 +23,6 @@ const App = () => {
           path: 'page1',
           element: <Module1Page1 />,
         },
-        {
-          path: 'page2',
-          element: <Module1Page2 />,
-        },
       ],
     },
     {
@@ -38,10 +33,10 @@ const App = () => {
   return element;
 };
 
-export default () => {
+export default function App() {
   return (
     <Router>
-      <App />
+      <Routes />
     </Router>
   );
-};
+}

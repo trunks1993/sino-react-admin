@@ -1,7 +1,7 @@
-export default (name: string) =>{
-const _name = name.replace(name[0], name[0].toUpperCase())
+export default (name: string) => {
+  const _name = name.replace(name[0], name[0].toUpperCase());
 
- return `import React from 'react';
+  return `import React from 'react';
 import { useDispatch } from "react-redux";
 import { getLoginAction, getLogoutAction } from '@/store/login/actions';
 
@@ -24,5 +24,5 @@ const ${_name}: React.FC<${_name}Props> = ({ name }) => {
 }
 
 export default ${_name};
-`
-}
+`;
+};

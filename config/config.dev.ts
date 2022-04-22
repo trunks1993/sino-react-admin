@@ -1,15 +1,14 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:55
- * @LastEditTime: 2022-04-20 17:25:46
+ * @LastEditTime: 2022-04-23 00:33:43
  */
-import Webpack from "webpack";
-import { join, resolve } from 'path';
+import Webpack from 'webpack';
+import { join } from 'path';
 import { merge } from 'webpack-merge';
 import baseWebpackConfig from './config';
 import constant from './constant';
 import { createMiddleware } from 'umi-mock';
-import portfinder from 'portfinder';
 
 const { SERVER_HOST, SERVER_PORT, ROOT_PATH } = constant;
 
@@ -25,7 +24,7 @@ const config = merge(baseWebpackConfig, {
     // 实际上只开启 hot：true 就会自动识别有无声明该插件，没有则自动引入，但是怕有隐藏问题这里还是手动加上了
     // new MockPlugin({
     //   rootPath: ROOT_PATH
-    // }) 
+    // })
   ],
   // 开发环境本地启动的服务配置
   devServer: {
@@ -36,8 +35,8 @@ const config = merge(baseWebpackConfig, {
     hot: true,
     compress: true, // 一切服务都启用gzip 压缩：
     client: {
-      logging: 'error',//只打印报错，其实只要这个配置就好了
-      overlay: {  //有报错发生，直接覆盖浏览器视窗，显示错误
+      logging: 'error',// 只打印报错，其实只要这个配置就好了
+      overlay: { // 有报错发生，直接覆盖浏览器视窗，显示错误
         errors: true,
         warnings: false,
       },

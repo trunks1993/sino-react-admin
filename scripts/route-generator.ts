@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import generate from '@babel/generator';
@@ -14,12 +13,12 @@ export interface NewRoute {
 
 /**
  * 将路由写入路由文件
- * @param {*} newRoute 新的路由配置: { path, component, ... }
+ * @param {*} newRoute 新的路由配置: { path, element, ... }
  * @param {*} configPath 配置路径
  * @param {*} absSrcPath 代码路径
  */
-export default function writeNewRoute(newRoute: NewRoute, configPath: string, absSrcPath: string) {
-  const { code, routesPath } = getNewRouteCode(newRoute, configPath, absSrcPath);
+export default function writeNewRoute(newRoute: NewRoute, configPath: string) {
+  const { code, routesPath } = getNewRouteCode(newRoute, configPath);
   writeFileSync(routesPath, code, 'utf-8');
 }
 
@@ -28,7 +27,7 @@ export default function writeNewRoute(newRoute: NewRoute, configPath: string, ab
  * @param {*} configPath
  * @param {*} newRoute
  */
-export function getNewRouteCode(newRoute: NewRoute, configPath: string, absSrcPath: string) {
+export function getNewRouteCode(newRoute: NewRoute, configPath: string) {
   const ast = parser.parse(readFileSync(configPath, 'utf-8'), {
     sourceType: 'module',
     plugins: ['jsx'],
@@ -42,17 +41,13 @@ export function getNewRouteCode(newRoute: NewRoute, configPath: string, absSrcPa
       let lastImportIndex = 0;
       body.forEach((item, index) => {
         if (t.isImportDeclaration(item)) {
-          lastImportIndex = index
-          const { specifiers } = item;
-          const defaultEpecifier = specifiers.find(s => {
-            return t.isImportDefaultSpecifier(s) && t.isIdentifier(s.local);
-          });
+          lastImportIndex = index;
         }
       });
       console.log('lastImportIndex', lastImportIndex);
       body.splice(lastImportIndex + 1, 0, getImportDeclarationAst(newRoute));
     },
-    ObjectExpression({ node, parent }) {
+    ObjectExpression({ node }) {
       const { properties } = node;
       properties.forEach(p => {
         const { key, value }: any = p;
@@ -77,6 +72,7 @@ export function getNewRouteCode(newRoute: NewRoute, configPath: string, absSrcPa
 }
 
 function getNewRouteNode(newRoute: NewRoute) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return parser.parse(`(${JSON.stringify(newRoute)})`).program.body[0].expression;
 }
@@ -86,16 +82,16 @@ function getNewRouteNode(newRoute: NewRoute) {
  * @param {*} node 找到的节点
  * @param {*} newRoute 新的路由配置
  */
-export function writeRouteNode(targetNode: any, newRoute: NewRoute, currentPath = '/') {
+export function writeRouteNode(targetNode: any, newRoute: NewRoute) {
   const { elements } = targetNode;
 
   const newNodeAst = getNewRouteNode({ path: newRoute.path, element: newRoute.element });
   newNodeAst.properties.forEach((p: any) => {
     const { key } = p;
     if (t.isStringLiteral(key) && key.value === 'element') {
-      p.value = getJsxElementAst(newRoute)
+      p.value = getJsxElementAst(newRoute);
     }
-  })
+  });
 
   elements.push(newNodeAst);
 }
@@ -136,8 +132,8 @@ function getJsxElementAst(newRoute: NewRoute) {
  * 获取ast
  * @param {*} name
  */
- function getImportDeclarationAst(newRoute: NewRoute) {
-  const path = '/pages' + newRoute.parent + '/' + newRoute.path
+function getImportDeclarationAst(newRoute: NewRoute) {
+  const path = '/pages' + newRoute.parent + '/' + newRoute.path;
   // const name = newRoute.path;
   const _name = upperCaseFirstLetter(newRoute.parent + upperCaseFirstLetter(newRoute.path));
   console.log('_name', _name);

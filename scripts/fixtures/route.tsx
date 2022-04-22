@@ -1,14 +1,15 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-21 08:58:26
- * @LastEditTime: 2022-04-21 09:42:06
+ * @LastEditTime: 2022-04-23 00:34:52
  */
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useRoutes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
 import Layout from '@/frame/layout';
 import Login from '@/frame/login';
+import Module1Page1 from '@/pages/module1/page1';
 
-const App = () => {
+const Routes = () => {
   const element = useRoutes([
     {
       path: '/',
@@ -17,12 +18,12 @@ const App = () => {
     {
       path: '/module1',
       element: <Layout />,
-      children: [],
-    },
-    {
-      path: '/module2',
-      element: <Layout />,
-      children: [],
+      children: [
+        {
+          path: 'page1',
+          element: <Module1Page1 />,
+        },
+      ],
     },
     {
       path: '/login',
@@ -32,10 +33,10 @@ const App = () => {
   return element;
 };
 
-export default () => {
+export default function App() {
   return (
     <Router>
-      <App />
+      <Routes />
     </Router>
   );
-};
+}

@@ -1,13 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-20 09:22:05
- * @LastEditTime: 2022-04-21 09:24:39
+ * @LastEditTime: 2022-04-23 00:23:34
  */
 import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet } from 'react-router';
 
-export default () => {
-  let navigate = useNavigate();
+const Layout = () => {
   // 下面两种写法等同
   useEffect(() => {
     // navigate('/module1/12', { replace: true });
@@ -19,3 +18,4 @@ export default () => {
     </div>
   );
 };
+export default Layout;

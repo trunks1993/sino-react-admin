@@ -8,7 +8,15 @@
     "start:mock": "cross-env NODE_ENV=development MOCK=ture webpack-dev-server --config ./config/config.dev.ts",
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
     "page": "ts-node ./scripts/page-generator.ts",
-    "test": "ts-node ./scripts/test.ts"
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
+    "test": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.tsx": [
+      "eslint --ext .tsx,.ts --fix ./src",
+      "prettier --write",
+      "git add"
+    ]
   },
   "browserslist": [
     ">0.2%",
@@ -36,16 +44,22 @@
     "@types/react-dom": "^18.0.0",
     "@types/signale": "^1.4.4",
     "@types/webpack-env": "^1.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "babel-loader": "^8.2.4",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
+    "eslint": "^8.13.0",
+    "eslint-plugin-react": "^7.29.4",
     "fork-ts-checker-webpack-plugin": "^7.2.3",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
     "inquirer": "^8.2.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "lint-staged": "^12.4.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.3",
