@@ -16,7 +16,7 @@ export default class RouterPlugin {
         }
       } } = compilation;
 
-      console.log('options', chunkGroups);
+      console.log('options', 'chunkGroups');
 
     });
   }

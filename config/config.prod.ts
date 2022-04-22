@@ -18,10 +18,6 @@ const config = merge(baseWebpackConfig, {
   // 指定构建环境
   mode: 'production',
   // 插件
-  output: {
-    filename: 'js/[name].[contenthash].js',
-    path: path.resolve(ROOT_PATH, './dist')
-  },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

@@ -49,6 +49,11 @@ export default {
   entry: {
     app: path.resolve(ROOT_PATH, './src/index')
   },
+  output: {
+    filename: 'js/[name].[contenthash].js',
+    path: path.resolve(ROOT_PATH, './dist'),
+    publicPath: "/",
+  },
   resolve: {
     alias: {
       '@': path.resolve(ROOT_PATH, './src'),

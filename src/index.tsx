@@ -7,7 +7,7 @@ import React from 'react';
 import ReactDOMClient from 'react-dom/client';
 import store from "@/store";
 import { Provider } from "react-redux";
-import App from './router';
+import App from './_router.config';
  
 if (module && module.hot) {
   module.hot.accept();
