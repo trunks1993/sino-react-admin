@@ -1,11 +1,12 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-22 23:48:13
- * @LastEditTime: 2022-04-23 00:28:54
+ * @LastEditTime: 2022-04-23 02:30:32
  */
 module.exports = {
   parser: '@typescript-eslint/parser', // 定义ESLint的解析器
   extends: [
+    'prettier',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
   ], // 定义文件继承的子规范
