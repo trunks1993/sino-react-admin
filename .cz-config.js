@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-23 01:09:36
- * @LastEditTime: 2022-04-23 11:16:42
+ * @LastEditTime: 2022-04-23 11:19:26
  */
 // import { existsSync, writeFileSync, readdirSync } from 'fs';
 const { readdirSync } = require('fs');
@@ -63,18 +63,18 @@ module.exports = {
     type: "Select the type of change that you're committing:",
     scope: '\nDenote the SCOPE of this change (optional):',
     // used if allowCustomScopes is true
-    // customScope: 'Denote the SCOPE of this change:',
-    // subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
-    // body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
-    // breaking: 'List any BREAKING CHANGES (optional):\n',
-    // footer: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
-    // confirmCommit: 'Are you sure you want to proceed with the commit above?',
+    customScope: 'Denote the SCOPE of this change:',
+    subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
+    body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
+    breaking: 'List any BREAKING CHANGES (optional):\n',
+    footer: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
+    confirmCommit: 'Are you sure you want to proceed with the commit above?',
   },
 
   allowCustomScopes: false,
   allowBreakingChanges: ['feat', 'fix'],
   // skip any questions you want
-  skipQuestions: ['body'],
+  skipQuestions: ['body', 'breaking', 'footer', 'footer'],
 
   // limit subject length
   subjectLimit: 100,
