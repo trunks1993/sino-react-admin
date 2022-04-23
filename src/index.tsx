@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:20:57
- * @LastEditTime: 2022-04-23 11:59:29
+ * @LastEditTime: 2022-04-23 12:03:17
  */
 import React from 'react';
 import ReactDOMClient from 'react-dom/client';
@@ -14,7 +14,7 @@ if (module && module.hot) {
 }
 
 const container: any = document.getElementById('root');
-// 新 createRoot API 暂时没有声明使用any
+// 新 createRoot API 暂时没有声明用any
 ReactDOMClient.createRoot(container).render(
   <Provider store={store}>
     <App />
