@@ -1,3 +1,12 @@
+## [1.0.9](https://github.com/trunkssss/sino-react-admin/compare/v1.0.8...v1.0.9) (2022-04-23)
+
+
+### Features
+
+* **module1:** v1.0.8 ([458feee](https://github.com/trunkssss/sino-react-admin/commit/458feee6c0e67d9daf4929652ea8a10d8ceab532))
+
+
+
 ## [1.0.8](https://github.com/trunkssss/sino-react-admin/compare/v1.0.7...v1.0.8) (2022-04-23)
 
 
