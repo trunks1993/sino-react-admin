@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-22 23:48:13
- * @LastEditTime: 2022-04-23 09:36:43
+ * @LastEditTime: 2022-04-23 17:54:58
  */
 module.exports = {
   parser: '@typescript-eslint/parser', // 定义ESLint的解析器
@@ -68,5 +68,8 @@ module.exports = {
     'react/self-closing-comp': 2, // 对于没有子元素的标签来说总是自己关闭标签
     'react/jsx-boolean-value': 1, // 如果属性值为 true, 可以直接省略
     '@typescript-eslint/no-explicit-any': ['off'],
+    'react/display-name': ['off', {
+      'ignoreTranspilerName': true
+    }]
   },
 };

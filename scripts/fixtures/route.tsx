@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-21 08:58:26
- * @LastEditTime: 2022-04-23 17:13:48
+ * @LastEditTime: 2022-04-23 22:45:28
  */
 import React from 'react';
 import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ const Routes = () => {
     },
     {
       path: '/login',
-      element: <Login name={''} />,
+      element: <Login />,
     },
   ]);
   return element;

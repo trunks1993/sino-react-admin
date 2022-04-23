@@ -1,14 +1,14 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:20:50
- * @LastEditTime: 2022-04-19 00:53:29
+ * @LastEditTime: 2022-04-23 21:36:28
  */
 import { combineReducers } from 'redux';
 
-import { reducer } from './login';
+import { reducer as frameState } from './frame';
 
 const rootReducer = combineReducers({
-  reducer,
+  frameState,
 });
 
 export default rootReducer;

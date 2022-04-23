@@ -88,7 +88,15 @@ export default {
             }
           }
         ]
-      }
+      },
+      // {
+      //   test: /\.(svg)$/,
+      //   type: 'asset/source',
+      //   generator: {
+      //   // 打包到 dist/image 文件下
+      //     filename: 'img/[contenthash][ext][query]',
+      //   },
+      // },
     ],
   },
   plugins: [

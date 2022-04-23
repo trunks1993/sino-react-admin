@@ -1,12 +1,29 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:20:59
- * @LastEditTime: 2022-04-19 00:51:43
+ * @LastEditTime: 2022-04-23 21:37:02
  */
-import { all, fork } from 'redux-saga/effects';
+import { all, call, spawn } from 'redux-saga/effects';
 
-import { saga } from './login';
+import { saga as frameSaga } from './frame';
 
 export default function* rootSaga() {
-  yield all([fork(saga)]);
+
+  const sagas = [frameSaga];
+
+  const spawns = sagas.map(saga => spawn(function* () {
+    while (true) {
+      try {
+        // saga出错会退出call阻塞，
+        // while循环再次调用call重新阻塞执行saga
+        yield call(saga);
+        break;
+      } catch (e) {
+        // 错误处理，例如上报运行错误
+        console.log(e);
+      }
+    }
+  }));
+
+  yield all(spawns);
 }

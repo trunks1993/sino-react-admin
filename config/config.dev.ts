@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-06 22:26:55
- * @LastEditTime: 2022-04-23 00:33:43
+ * @LastEditTime: 2022-04-23 22:20:31
  */
 import Webpack from 'webpack';
 import { join } from 'path';
@@ -59,10 +59,15 @@ const config = merge(baseWebpackConfig, {
     },
     proxy: {
       '/api': {
-        target: process.env.MOCK ? `http://${SERVER_HOST}:${SERVER_PORT}` : 'http://192.168.100.246:31012',
+        target: 'http://192.168.100.246:31012',
         changeOrigin: true,
         pathRewrite: { '^/api': '' }
-      }
+      },
+      '/mock': {
+        target: `http://${SERVER_HOST}:${SERVER_PORT}`,
+        changeOrigin: true,
+        pathRewrite: { '^/mock': '' }
+      },
     }
   }
 } as Webpack.Configuration);

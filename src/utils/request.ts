@@ -1,25 +1,25 @@
 /*
  * @Author: wangzhijian
  * @Date: 2021-05-22 22:13:58
- * @LastEditTime: 2022-04-23 00:26:52
+ * @LastEditTime: 2022-04-23 22:41:06
  */
 import { extend } from 'umi-request';
 import { Base64 } from 'js-base64';
 import { whiteUrls, AUTH_KEY, getToken, CustomHeader, CLIENT_SECRET, CLIENT_ID, API_LOGIN } from './auth';
-import { AppError, AUTH_ERROR, code2Message, HTTP_ERROR, HTTP_SUCCESS } from './appError';
+import { AppError, AUTH_ERROR, code2Message, HTTP_ERROR, HTTP_SUCCESS, RESPONSE_ERROR } from './appError';
+import { notification } from 'antd';
 
 /**
  * 异常处理程序
  */
 const errorHandler = (error: Error) => {
-
   if (error.name === AUTH_ERROR) {
     // 清除token重新登录
     return;
   }
 
   // 剩下的错误全部弹提示 并返回[false, undefined]
-  // alert(error.message);
+  notification.error({ message: error.message });
 
   return Promise.resolve([false]);
 };
@@ -28,7 +28,8 @@ const errorHandler = (error: Error) => {
  * 配置request请求时的默认参数
  */
 const request = extend({
-  prefix: process.env.BASE_API,
+  // 开发环境下动态切换线上和mock环境
+  prefix: process.env.NODE_ENV === 'production' ? process.env.BASE_API : '/mock',
   errorHandler, // 默认错误处理
   credentials: 'omit', // 默认请求是否带上cookie
   timeout: 10000,
@@ -60,7 +61,10 @@ request.interceptors.response.use(async(response: Response): Promise<any> => {
     throw new AppError(HTTP_ERROR, response.statusText);
   });
 
+
   const { code, data, msg } = res;
+
+  if (data === undefined) throw new AppError(RESPONSE_ERROR, msg || '数据加载出错');
 
   if (code !== HTTP_SUCCESS) throw new AppError(code2Message[code], msg);
 

@@ -1,37 +1,62 @@
-/*
- * @Author: wangzhijian
- * @Date: 2022-04-20 09:22:05
- * @LastEditTime: 2022-04-21 10:32:56
- */
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { getLoginAction, getLogoutAction } from '@/store/login/actions';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLoginAction, getMenuAction } from '@/store/frame/actions';
+import { useNavigate } from 'react-router-dom';
+import { ConnectState } from '@/models';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoginParams } from '@/models/frame';
 
-  interface LoginProps {
-    name: string;
-  }
-
-const Login: React.FC<LoginProps> = ({ name }) => {
+const Login: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(getLogoutAction());
+  const loadingGlobal = useSelector(({ frameState }: ConnectState) => frameState.loadingGlobal);
+  const access_token = useSelector(({ frameState }: ConnectState) => frameState.userInfo.access_token);
+
+  useEffect(() => {
+    if (access_token) navigate('/system/user');
+  }, [access_token]);
+
+  const handleLogin = (paramas: LoginParams) => {
+    dispatch(getLoginAction(paramas));
   };
 
-  const handleLogin = () => {
-    // jun.wei&password=e10adc3949ba59abbe56e057f20f883
-    dispatch(getLoginAction({ username: 'jun.wei', password: 'e10adc3949ba59abbe56e057f20f883e' }));
+  const handleMenu = () => {
+    dispatch(getMenuAction());
   };
 
-  return <div className="container-page">
-    <div className="login__block1">
-      <div className="login__block1-element1">
-        <div className="login__block1-element1-text" />
+  return (
+    <div className="login">
+      <div className="login__title">
+        <span className="login__title-logo">
+          <img alt="logo" src="https://preview.pro.ant.design/logo.svg" />
+        </span>
+        <span className="login__title-name">三诺教育平台</span>
+      </div>
+      <div className="login__form">
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={handleLogin}
+          // onFinishFailed={onFinishFailed}
+          autoComplete="off"
+          size="large"
+        >
+          <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
+            <Input placeholder="用户名" prefix={<UserOutlined />} />
+          </Form.Item>
+          <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
+            <Input.Password placeholder="密码" prefix={<LockOutlined />} />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block loading={loadingGlobal}>登录</Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
-    <button onClick={handleLogin}>登录{name}</button>
-    <button onClick={handleLogout}>退出</button>
-  </div>;
+  );
 };
 
 export default Login;
