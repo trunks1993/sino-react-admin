@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-23 01:09:36
- * @LastEditTime: 2022-04-23 11:54:04
+ * @LastEditTime: 2022-04-23 12:00:41
  */
 // import { existsSync, writeFileSync, readdirSync } from 'fs';
 const { readdirSync } = require('fs');
@@ -62,7 +62,7 @@ module.exports = {
   allowCustomScopes: false, // 自定义设置scope
   allowBreakingChanges: ['feat', 'fix'], // 记入日志的类型
   // skip any questions you want
-  skipQuestions: ['body', 'breaking', 'footer'], // 允许跳过的询问项
+  skipQuestions: ['breaking', 'footer'], // 允许跳过的询问项
 
   // limit subject length
   subjectLimit: 100,
