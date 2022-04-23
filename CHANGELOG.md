@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.1.0](https://github.com/trunkssss/sino-react-admin/compare/v1.0.13...v1.1.0) (2022-04-23)
+
+
+### Features
+
+* **module1-page2:** 测试一下 ([9ecda09](https://github.com/trunkssss/sino-react-admin/commit/9ecda09f2fcecbf752c0738b02797655ceddfcdb))
+* **module1:** v1.0.13 ([73c84ee](https://github.com/trunkssss/sino-react-admin/commit/73c84eec27e2b73bc38b913506332ab5c2437fad))
+
 ## [1.0.13](https://github.com/trunkssss/sino-react-admin/compare/v1.0.12...v1.0.13) (2022-04-23)
 
 
@@ -119,6 +131,3 @@
 ### BREAKING CHANGES
 
 * **module1-page2:** gg
-
-
-
