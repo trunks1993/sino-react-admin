@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-23 01:09:36
- * @LastEditTime: 2022-04-23 12:00:41
+ * @LastEditTime: 2022-04-23 13:02:49
  */
 // import { existsSync, writeFileSync, readdirSync } from 'fs';
 const { readdirSync } = require('fs');
@@ -59,7 +59,7 @@ module.exports = {
     confirmCommit: 'Are you sure you want to proceed with the commit above?',
   },
 
-  allowCustomScopes: false, // 自定义设置scope
+  allowCustomScopes: true, // 自定义设置scope
   allowBreakingChanges: ['feat', 'fix'], // 记入日志的类型
   // skip any questions you want
   skipQuestions: ['breaking', 'footer'], // 允许跳过的询问项
