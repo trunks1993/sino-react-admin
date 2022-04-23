@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-23 01:09:36
- * @LastEditTime: 2022-04-23 11:13:16
+ * @LastEditTime: 2022-04-23 11:16:42
  */
 // import { existsSync, writeFileSync, readdirSync } from 'fs';
 const { readdirSync } = require('fs');
@@ -12,7 +12,7 @@ const scopes = []
 modules.map(pathname => {
   const dirs = readdirSync(join(__dirname, './src/pages', pathname)).map(dir => ({ name: pathname + '-' + dir }));
   
-  scopes.push(...dirs);
+  scopes.push(...[{ name: pathname }, ...dirs]);
 })
 
 module.exports = {
