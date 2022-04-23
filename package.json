@@ -9,7 +9,8 @@
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
     "page": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "commit": "git-cz"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -49,10 +50,12 @@
     "babel-loader": "^8.2.4",
     "clean-webpack-plugin": "^4.0.0",
     "commitizen": "^4.2.4",
+    "commitlint-config-cz": "^0.13.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "eslint": "^8.13.0",
     "eslint-plugin-react": "^7.29.4",
     "fork-ts-checker-webpack-plugin": "^7.2.3",
