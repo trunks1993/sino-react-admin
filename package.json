@@ -1,17 +1,17 @@
 {
   "name": "sino-react-admin",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/config.dev.ts",
-    "start:mock": "cross-env NODE_ENV=development MOCK=ture webpack-dev-server --config ./config/config.dev.ts",
+    "s:d": "cross-env NODE_ENV=development webpack-dev-server --config ./config/config.dev.ts",
+    "s:m": "cross-env NODE_ENV=development MOCK=ture webpack-dev-server --config ./config/config.dev.ts",
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
-    "page": "ts-node ./scripts/page-generator.ts",
+    "p": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "postinstall": "husky install",
-    "commit": "git add . && git-cz",
-    "release": "standard-version"
+    "c": "git add . && git-cz",
+    "r": "standard-version"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
