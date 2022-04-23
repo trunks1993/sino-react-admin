@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-19 00:31:38
- * @LastEditTime: 2022-04-20 17:21:39
+ * @LastEditTime: 2022-04-23 09:50:32
  */
 import { LoginParams } from '@/models/login';
 import request from '@/utils/request';
@@ -24,6 +24,3 @@ export const test = () => request('/mp/edu/user/card/add', {
   method: 'POST',
   data: {}
 });
-
-
-// /mp/edu/user/card/add

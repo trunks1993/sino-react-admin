@@ -9,18 +9,17 @@
     "build": "cross-env NODE_ENV=production webpack --config ./config/config.prod.ts",
     "page": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "prepare": "husky install"
+    "postinstall": "husky install"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "src/**/*.tsx": [
-      "eslint --ext .tsx,.ts --fix ./src",
-      "git add"
+      "eslint --ext .tsx,.ts --fix ./src"
     ]
   },
   "browserslist": [
