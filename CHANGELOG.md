@@ -1,6 +1,14 @@
 # 更新历史 
 
 
+## [1.3.0](https://github.com/trunkssss/sino-react-admin/compare/v1.2.0...v1.3.0) (2022-04-23)
+
+
+### ✨ Features | 新功能
+
+* **module1-page1:** 新增page1 测试页面 ([6e6d6fe](https://github.com/trunkssss/sino-react-admin/commit/6e6d6fedd5cc064115821c7c3f9773bec44f071f))
+* **module1:** 测试一下 ([bccbb4f](https://github.com/trunkssss/sino-react-admin/commit/bccbb4f854daa9cedb6b05ea18d3f05f7c7cf55d))
+
 ## [1.2.0](https://github.com/trunkssss/sino-react-admin/compare/v1.1.0...v1.2.0) (2022-04-23)
 
 
