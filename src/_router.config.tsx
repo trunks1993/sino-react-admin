@@ -7,6 +7,7 @@ import React from 'react';
 import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
 import Layout from '@/frame/layout';
 import Login from '@/frame/login';
+import Module1Page1 from '@/pages/module1/page1';
 
 const Routes = () => {
   const element = useRoutes([
@@ -17,7 +18,12 @@ const Routes = () => {
     {
       path: '/module1',
       element: <Layout />,
-      children: [],
+      children: [
+        {
+          path: 'page1',
+          element: <Module1Page1 />,
+        },
+      ],
     },
     {
       path: '/login',
