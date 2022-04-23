@@ -1,13 +1,13 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-21 08:58:26
- * @LastEditTime: 2022-04-23 11:56:07
+ * @LastEditTime: 2022-04-23 17:18:01
  */
 import React from 'react';
 import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
 import Layout from '@/frame/layout';
 import Login from '@/frame/login';
-import Module1Page1 from '@/pages/module1/page1';
+import SystemUser from '@/pages/system/user';
 
 const Routes = () => {
   const element = useRoutes([
@@ -16,12 +16,12 @@ const Routes = () => {
       element: <Navigate to="/module1" replace />,
     },
     {
-      path: '/module1',
+      path: '/system',
       element: <Layout />,
       children: [
         {
-          path: 'page1',
-          element: <Module1Page1 />,
+          path: 'user',
+          element: <SystemUser />,
         },
       ],
     },

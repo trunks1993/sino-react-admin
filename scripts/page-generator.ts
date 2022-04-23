@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-20 00:42:02
- * @LastEditTime: 2022-04-23 00:38:50
+ * @LastEditTime: 2022-04-23 17:05:15
  */
 import { existsSync, writeFileSync, readdirSync } from 'fs';
 import writeNewRoute from './route-generator';
@@ -24,8 +24,8 @@ import getPage from './temp/getPage';
     },
     module.length > 0 ? {
       type: 'confirm',
-      message: '是否新增模块:',
-      name: 'isNew',
+      message: '是否选择现有模块:',
+      name: 'isSelect',
     } : undefined,
     {
       type: 'list',
@@ -35,7 +35,7 @@ import getPage from './temp/getPage';
         name,
       })),
       when: function(answers: any) {
-        return !answers.isNew && module.length > 0;
+        return answers.isSelect && module.length > 0;
       }
     },
     {
@@ -43,14 +43,14 @@ import getPage from './temp/getPage';
       message: '请输入模块名称:',
       name: 'moduleName',
       when: function(answers: any) {
-        return answers.isNew === undefined || answers.isNew;
+        return answers.isSelect === undefined || !answers.isSelect;
       }
     }
   ];
 
   const res = await inquirer.prompt(promptList.filter(item => item));
 
-  const { name, isNew, moduleName } = res;
+  const { name, isSelect, moduleName } = res;
 
   if (!name) {
     return signale.error('please type the page name.');
@@ -58,7 +58,7 @@ import getPage from './temp/getPage';
 
   const pageIndexPath = join(__dirname, '../src/pages', moduleName, name, 'index.tsx');
 
-  if (isNew || isNew === undefined) {
+  if (!isSelect || isSelect === undefined) {
     await mkdirp(join(__dirname, '../src/pages', moduleName));
   }
 

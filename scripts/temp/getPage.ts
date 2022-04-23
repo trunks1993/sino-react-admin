@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-22 20:51:24
- * @LastEditTime: 2022-04-23 13:07:46
+ * @LastEditTime: 2022-04-23 14:34:38
  */
 export default (name: string) => {
   const _name = name.replace(name[0], name[0].toUpperCase());
@@ -13,7 +13,7 @@ interface ${_name}Props {
 }
 
 const ${_name}: React.FC<${_name}Props> = ({ name }) => {
-  
+
   return <div>${_name}</div> ;
 };
 
