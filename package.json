@@ -1,6 +1,6 @@
 {
   "name": "sino-react-admin",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,8 @@
     "page": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "postinstall": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -51,6 +52,8 @@
     "clean-webpack-plugin": "^4.0.0",
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.3",
+    "conventional-changelog": "^3.1.25",
+    "conventional-changelog-cli": "^2.2.2",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
