@@ -10,7 +10,7 @@
     "page": "ts-node ./scripts/page-generator.ts",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "postinstall": "husky install",
-    "commit": "git-cz",
+    "commit": "git add . && git-cz",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "lint-staged": {
