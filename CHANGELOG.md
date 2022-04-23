@@ -1,4 +1,4 @@
-## [1.0.9](https://github.com/trunkssss/sino-react-admin/compare/v1.0.10...v1.0.9) (2022-04-23)
+## [1.0.11](https://github.com/trunkssss/sino-react-admin/compare/v1.0.10...v1.0.11) (2022-04-23)
 
 
 ### Bug Fixes
