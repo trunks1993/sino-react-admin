@@ -1,7 +1,7 @@
 /*
  * @Author: wangzhijian
  * @Date: 2022-04-21 08:58:26
- * @LastEditTime: 2022-04-23 09:28:40
+ * @LastEditTime: 2022-04-23 10:22:39
  */
 import React from 'react';
 import { BrowserRouter as Router, useRoutes, Navigate } from 'react-router-dom';
