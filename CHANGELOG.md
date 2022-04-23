@@ -1,6 +1,13 @@
 # 更新历史 
 
 
+## [1.4.0](https://github.com/trunkssss/sino-react-admin/compare/v1.3.0...v1.4.0) (2022-04-23)
+
+
+### ✨ Features | 新功能
+
+* **module1:** 删掉changlog插件试试能不能发版 ([1719e01](https://github.com/trunkssss/sino-react-admin/commit/1719e01169c2b0865d0bf802c77dc1435360d7d6))
+
 ## [1.3.0](https://github.com/trunkssss/sino-react-admin/compare/v1.2.0...v1.3.0) (2022-04-23)
 
 
