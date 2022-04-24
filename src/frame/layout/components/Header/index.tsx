@@ -12,6 +12,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLogoutAction } from '@/store/frame/actions';
 import { ConnectState } from '@/models';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import { MenuItemType } from 'rc-menu/lib/interface';
+// import { SubMenuType } from 'antd/lib/menu/hooks/useItems';
 const { Header } = Layout;
 
 interface HeaderProps {
@@ -21,8 +24,8 @@ interface HeaderProps {
 export default (({ className }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const nick_name = useSelector(({ frameState }: ConnectState) => frameState.userInfo.nick_name);
-  const access_token = useSelector(({ frameState }: ConnectState) => frameState.userInfo.access_token);
+  const nick_name = useSelector(({ frameState }: ConnectState) => frameState.authInfo.nick_name);
+  const access_token = useSelector(({ frameState }: ConnectState) => frameState.authInfo.access_token);
 
   useEffect(() => {
     if (!access_token) navigate('/login');
@@ -31,58 +34,32 @@ export default (({ className }) => {
     dispatch(getLogoutAction());
   };
 
-  // const menu = (
-  //   <Menu>
-  //     <Menu.Item>
-  //       <Link to="user">
-  //         首页
-  //       </Link>
-  //     </Menu.Item>
-  //     <Menu.Item>
-  //       <Link to="user">
-  //         个人中心
-  //       </Link>
-  //     </Menu.Item>
-  //     <Divider style={{ margin: 0 }} />
-  //     <Menu.Item onClick={handleLogout}>
-  //       退出
-  //     </Menu.Item>
-  //   </Menu>
-  // );
-
-  // @ts-ignore
-  const items: MenuProps['items'] = [
+  const items: ItemType[] = [
     {
       label: '个人中心',
-      icon: <UserOutlined />,
-      style: { minWidth: '160px' }
+      key: 'minf',
+      itemIcon: <UserOutlined />,
     },
     {
       label: '系统设置',
-      icon: <SettingOutlined />
+      key: 'system',
+      itemIcon: <SettingOutlined />,
     },
     {
-      type: 'divider'
+      type: 'divider',
     },
     {
       label: '退出登录',
+      key: 'login',
+      itemIcon: <LogoutOutlined />,
       onClick: handleLogout,
-      icon: <LogoutOutlined />
     }
   ];
-
-  const menu = (
-    // @ts-ignore
-    <Menu items={items}
-    />
-  );
-
 
   return (
     <Header className={className}>
       <div style={{ flex: 1 }} />
-      {/* @ts-ignore */}
-      <Dropdown overlay={menu} placement="bottom">
+      <Dropdown overlay={<Menu items={items} style={{ minWidth: '160px' }} />} placement="bottom">
         <a onClick={e => e.preventDefault()} style={{ marginRight: '20px' }}>
           {nick_name} <DownOutlined />
         </a>

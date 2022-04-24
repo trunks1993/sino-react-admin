@@ -3,6 +3,7 @@
  * @Date: 2022-04-20 10:16:07
  * @LastEditTime: 2022-04-20 14:19:19
  */
+import { AuthInfo } from '@/models/frame';
 import Cookies from 'js-cookie';
 
 export const AUTH_KEY = 'Sino-Auth';
@@ -14,6 +15,12 @@ export const getToken = () => Cookies.get(AUTH_KEY);
 export const setToken = (token: string) => Cookies.set(AUTH_KEY, token);
 
 export const removeToken = () => Cookies.remove(AUTH_KEY);
+
+export const setAuthInfo = (data: AuthInfo) => localStorage.setItem(AUTH_KEY, JSON.stringify(data));
+
+export const getAuthInfo = () => localStorage.getItem(AUTH_KEY);
+
+export const removeAuthInfo = () => localStorage.removeItem(AUTH_KEY);
 
 export const API_LOGIN = process.env.BASE_API + '/sino-auth/oauth/token';
 

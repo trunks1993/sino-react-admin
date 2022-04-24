@@ -1,4 +1,4 @@
-import { FrameState, LoginParams, UserInfo } from '@/models/frame';
+import { FrameState, LoginParams, AuthInfo } from '@/models/frame';
 import produce from 'immer';
 import { Task } from 'redux-saga';
 import { all, call, fork, put, take, takeLatest } from 'redux-saga/effects';
@@ -10,7 +10,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth';
 const initialState: FrameState = {
   siderCollapsed: false,
   loadingGlobal: false,
-  userInfo: {
+  authInfo: {
     access_token: getToken(),
   },
 };
@@ -26,10 +26,10 @@ const reducer = (state = initialState, action: FrameAction) => produce(state, dr
       break;
     case FRAME_LOGIN_SUCCESS:
       draft.loadingGlobal = false;
-      draft.userInfo = action.payload;
+      draft.authInfo = action.payload;
       break;
     case FRAME_LOGOUT:
-      draft.userInfo = {};
+      draft.authInfo = {};
       break;
     case FRAME_LOGIN_FAIL:
       draft.loadingGlobal = false;
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action: FrameAction) => produce(state, dr
 
 // 异步调用api
 function* loginByUsername(action: LoginAction) {
-  const [success, data]:Response<UserInfo> = yield call(login, action.payload);
+  const [success, data]:Response<AuthInfo> = yield call(login, action.payload);
   if (!success){
     yield put(getLoginFailAction());
     return;

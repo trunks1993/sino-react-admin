@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const loadingGlobal = useSelector(({ frameState }: ConnectState) => frameState.loadingGlobal);
-  const access_token = useSelector(({ frameState }: ConnectState) => frameState.userInfo.access_token);
+  const access_token = useSelector(({ frameState }: ConnectState) => frameState.authInfo.access_token);
 
   useEffect(() => {
     if (access_token) navigate('/system/user');

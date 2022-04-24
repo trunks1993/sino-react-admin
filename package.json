@@ -10,7 +10,8 @@
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "postinstall": "husky install",
     "c": "git add . && git-cz",
-    "r": "standard-version"
+    "r": "standard-version",
+    "test": "jest"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -35,6 +36,7 @@
     "@types/babel__generator": "^7.6.4",
     "@types/babel__traverse": "^7.17.0",
     "@types/inquirer": "^8.2.1",
+    "@types/jest": "^27.4.1",
     "@types/js-cookie": "^3.0.1",
     "@types/js-md5": "^0.4.3",
     "@types/lodash-es": "^4.17.6",
@@ -61,6 +63,8 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "inquirer": "^8.2.2",
+    "jest": "^27.5.1",
+    "jest-localstorage-mock": "^2.4.21",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "lint-staged": "^12.4.0",
@@ -71,6 +75,7 @@
     "slash2": "^2.0.0",
     "standard-version": "^9.3.2",
     "style-loader": "^3.3.1",
+    "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
     "umi-mock": "2.1.4",

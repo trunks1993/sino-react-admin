@@ -1,7 +1,7 @@
 export interface FrameState {
   loadingGlobal: boolean;
   siderCollapsed: boolean;
-  userInfo: UserInfo;
+  authInfo: AuthInfo;
 }
 
 export interface LoginParams {
@@ -9,7 +9,7 @@ export interface LoginParams {
   password: string;
 }
 
-export interface UserInfo {
+export interface AuthInfo {
   access_token?: string;
   account?: string;
   account_id?: string;

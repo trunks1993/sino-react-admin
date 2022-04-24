@@ -11,6 +11,8 @@ import { getSiderCollapseAction } from '@/store/frame/actions';
 import { ConnectState } from '@/models';
 import { reverse, join } from 'lodash-es';
 import { useNavigate } from 'react-router-dom';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import MenuItem from 'antd/lib/menu/MenuItem';
 
 const { Sider } = Layout;
 
@@ -26,33 +28,83 @@ export default () => {
 
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     console.log();
-    const path = join(reverse(e.keyPath), '/');
-    navigate(path);
+    // const path = join(reverse(e.keyPath), '/');
+    navigate(e.key);
   };
+
+  type MenuItem = Required<MenuProps>['items'][number];
+
+
+  function getItem(
+    label: React.ReactNode,
+    key: React.Key,
+    icon?: React.ReactNode,
+    children?: MenuItem[],
+    type?: 'group',
+  ): MenuItem {
+    return {
+      key,
+      icon,
+      children,
+      label,
+      type,
+    } as MenuItem;
+  }
+
+  const siderMenus: MenuItem[] = [
+    getItem('首页', 'dashboard', <MailOutlined />),
+    // getItem('', '2', <MenuUnfoldOutlined />),
+    // getItem('Option 3', '3', <MenuUnfoldOutlined />),
+
+    getItem('系统设置', 'system', <MailOutlined />, [
+      getItem('菜单管理', 'menu', <MailOutlined />),
+      getItem('用户管理', 'user', <MailOutlined />),
+    ]),
+  ];
+
+
+  // const siderMenus: ItemType[] = [
+  //   {
+  //     label: 'fff',
+  //     key: 'about',
+  //     itemIcon: <MailOutlined />,
+  //   },
+  //   {
+  //     // type: 'group',
+  //     key: 'system',
+  //     label: '系统设置',
+  //     children: [
+  //       {
+  //         label: '用户管理',
+  //         key: 'user',
+  //         itemIcon: <AppstoreOutlined />,
+  //       },
+  //       {
+  //         label: '菜单管理',
+  //         key: 'menu',
+  //         itemIcon: <AppstoreOutlined />,
+  //       },
+  //     ]
+  //   }
+  // ];
+
+  const collapseMenu: ItemType[] = [
+    {
+      type: 'divider'
+    },
+    {
+      key: 'fold',
+      itemIcon: <MenuUnfoldOutlined />,
+      onClick: handleCollapseChange
+    }
+  ];
 
   return (
     <Sider theme="light" className="sider" trigger={null} collapsible collapsed={siderCollapsed}>
       <div className="sider__wrapper--top">
-        <Menu mode="inline" defaultSelectedKeys={['user']} onClick={handleMenuClick}>
-          <Menu.Item key="about" icon={<MailOutlined />}>
-            首页
-          </Menu.Item>
-          <Menu.SubMenu key="/system" title="系统设置" icon={<SettingOutlined />}>
-            <Menu.Item key="user" icon={<AppstoreOutlined />}>
-              用户管理
-            </Menu.Item>
-            <Menu.Item key="menu" icon={<AppstoreOutlined />}>
-              菜单管理
-            </Menu.Item>
-          </Menu.SubMenu>
-        </Menu>
+        <Menu mode="vertical" items={siderMenus} onClick={handleMenuClick} />
       </div>
-      <div>
-        <Divider style={{ margin: 0 }} />
-        <Menu mode="vertical" selectable={false} >
-          <Menu.Item key="fold" icon={<MenuUnfoldOutlined />} onClick={handleCollapseChange} />
-        </Menu>
-      </div>
+      <Menu items={collapseMenu} mode="vertical" selectable={false} />
     </Sider>
   );
 };

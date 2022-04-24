@@ -1,4 +1,4 @@
-import { LoginParams, Menu, UserInfo } from '@/models/frame';
+import { LoginParams, Menu, AuthInfo } from '@/models/frame';
 // import { Menu } from 'antd';
 
 // sider collapase
@@ -38,7 +38,7 @@ export interface LoginFailAction {
 
 export interface LoginSuccessAction {
   type: typeof FRAME_LOGIN_SUCCESS;
-  payload: UserInfo;
+  payload: AuthInfo;
 }
 
 export interface MenuAction {
@@ -70,7 +70,7 @@ export const getLogoutAction = (): LogoutAction => ({
   type: FRAME_LOGOUT,
 });
 
-export const getLoginSuccessAction = (payload: UserInfo): LoginSuccessAction => ({
+export const getLoginSuccessAction = (payload: AuthInfo): LoginSuccessAction => ({
   type: FRAME_LOGIN_SUCCESS,
   payload
 });
