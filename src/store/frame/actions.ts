@@ -16,7 +16,7 @@ export const FRAME_LOGOUT = 'FRAME_LOGOUT';
 export const FRAME_MENU = 'FRAME_MENU';
 export const FRAME_MENU_SUCCESS = 'FRAME_MENU_SUCCESS';
 export const FRAME_MENU_FAIL = 'FRAME_MENU_FAIL';
-
+export const FRAME_MENU_CLEAR = 'FRAME_MENU_CLEAR';
 
 // action接口
 export interface SiderCollapseAction {
@@ -54,7 +54,11 @@ export interface MenuFailAction {
   type: typeof FRAME_MENU_FAIL;
 }
 
-export type FrameAction = SiderCollapseAction | LoginAction | LoginSuccessAction | LogoutAction | LoginFailAction;
+export interface MenuClearAction {
+  type: typeof FRAME_MENU_CLEAR;
+}
+
+export type FrameAction = SiderCollapseAction | LoginAction | LoginSuccessAction | LogoutAction | LoginFailAction | MenuFailAction | MenuClearAction | MenuSuccessAction | MenuAction;
 
 // action api
 export const getSiderCollapseAction = (): SiderCollapseAction => ({
@@ -90,4 +94,8 @@ export const getMenuSuccessAction = (payload: Menu[]): MenuSuccessAction => ({
 
 export const getMenuFailAction = (): MenuFailAction => ({
   type: FRAME_MENU_FAIL,
+});
+
+export const getMenuClearAction = (): MenuClearAction => ({
+  type: FRAME_MENU_CLEAR,
 });

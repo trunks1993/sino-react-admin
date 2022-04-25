@@ -1,7 +1,13 @@
+enum MenuCategory {
+  parent = 1,
+  child,
+}
 export interface FrameState {
   loadingGlobal: boolean;
+  loadingAuthMenu: boolean;
   siderCollapsed: boolean;
   authInfo: AuthInfo;
+  authMenu: Menu[];
 }
 
 export interface LoginParams {
@@ -46,5 +52,8 @@ export interface Menu {
   id?: string;
   name?: string;
   path?: string;
-  children: Menu[];
+  category?: MenuCategory.parent | MenuCategory.child;
+  hasChildren?: boolean;
+  parentId?: string;
+  children?: Menu[];
 }

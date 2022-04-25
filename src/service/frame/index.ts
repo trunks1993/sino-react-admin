@@ -23,6 +23,6 @@ export const login = ({ username, password }: LoginParams) => request('/sino-aut
   }
 });
 
-export const fetchMenu = () => request('/sino-system/menu/list', {
+export const fetchMenu = () => request('/sino-system/menu/routes', {
   method: 'GET',
 });

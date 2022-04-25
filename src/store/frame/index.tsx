@@ -1,18 +1,17 @@
-import { FrameState, LoginParams, AuthInfo } from '@/models/frame';
+import { FrameState, AuthInfo, Menu } from '@/models/frame';
 import produce from 'immer';
-import { Task } from 'redux-saga';
-import { all, call, fork, put, take, takeLatest } from 'redux-saga/effects';
-import { FrameAction, getLoginSuccessAction, LoginAction, FRAME_SIDER_COLLAPSE, FRAME_LOGIN, FRAME_LOGIN_SUCCESS, FRAME_MENU, FRAME_LOGOUT, FRAME_LOGIN_FAIL, getLoginFailAction } from './actions';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { FrameAction, getLoginSuccessAction, LoginAction, FRAME_SIDER_COLLAPSE, FRAME_LOGIN, FRAME_LOGIN_SUCCESS, FRAME_MENU, FRAME_LOGOUT, FRAME_LOGIN_FAIL, getLoginFailAction, getMenuSuccessAction, getMenuFailAction, FRAME_MENU_SUCCESS, FRAME_MENU_FAIL, FRAME_MENU_CLEAR, getMenuClearAction } from './actions';
 import { Response } from '@/models';
 import { login, fetchMenu } from '@/service/frame';
-import { getToken, setToken, removeToken } from '@/utils/auth';
+import { getAuthInfo, setAuthInfo, removeAuthInfo } from '@/utils/auth';
 
 const initialState: FrameState = {
   siderCollapsed: false,
   loadingGlobal: false,
-  authInfo: {
-    access_token: getToken(),
-  },
+  authInfo: getAuthInfo(),
+  authMenu: [],
+  loadingAuthMenu: false,
 };
 
 const reducer = (state = initialState, action: FrameAction) => produce(state, draft => {
@@ -34,27 +33,45 @@ const reducer = (state = initialState, action: FrameAction) => produce(state, dr
     case FRAME_LOGIN_FAIL:
       draft.loadingGlobal = false;
       break;
+    case FRAME_MENU:
+      draft.loadingAuthMenu = true;
+      break;
+    case FRAME_MENU_SUCCESS:
+      draft.loadingAuthMenu = false;
+      draft.authMenu = action.payload;
+      break;
+    case FRAME_MENU_FAIL:
+      draft.loadingAuthMenu = false;
+      break;
+    case FRAME_MENU_CLEAR:
+      draft.authMenu = [];
+      break;
   }
 });
 
 // 异步调用api
 function* loginByUsername(action: LoginAction) {
   const [success, data]:Response<AuthInfo> = yield call(login, action.payload);
-  if (!success){
+  if (!success || !data?.access_token){
     yield put(getLoginFailAction());
     return;
   }
-  if (data.access_token) setToken(data.access_token);
+  setAuthInfo(data);
   yield put(getLoginSuccessAction(data));
 }
 
 function* getMenu() {
-  const [success, data]:Response<any> = yield call(fetchMenu);
-  console.log(success, data);
+  const [success, data]:Response<Menu[]> = yield call(fetchMenu);
+  if (!success || !data?.length) {
+    yield put(getMenuFailAction());
+    return;
+  }
+  yield put(getMenuSuccessAction(data));
 }
 
 function* logout() {
-  yield removeToken();
+  yield removeAuthInfo();
+  yield put(getMenuClearAction());
 }
 
 // 此模块的saga处理函数

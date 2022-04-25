@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLoginAction, getMenuAction } from '@/store/frame/actions';
 import { useNavigate } from 'react-router-dom';
 import { ConnectState } from '@/models';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { LoginParams } from '@/models/frame';
 
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const access_token = useSelector(({ frameState }: ConnectState) => frameState.authInfo.access_token);
 
   useEffect(() => {
-    if (access_token) navigate('/system/user');
+    if (access_token) navigate('/system/menu');
   }, [access_token]);
 
   const handleLogin = (paramas: LoginParams) => {

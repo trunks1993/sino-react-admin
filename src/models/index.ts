@@ -6,7 +6,7 @@
 
 import { FrameState } from './frame';
 
-export type Response<T> = [boolean, T];
+export type Response<T> = [boolean, T | undefined];
 export interface Page<T> {
   list: T[];
   total: number;

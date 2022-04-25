@@ -1,8 +1,3 @@
-/*
- * @Author: wangzhijian
- * @Date: 2022-04-20 15:27:01
- * @LastEditTime: 2022-04-23 22:34:12
- */
 export const HTTP_ERROR = 'HTTP_ERROR'; // 服务端错误
 export const SYSTEM_ERROR = 'SYSTEM_ERROR'; // 系统错误
 export const AUTH_ERROR = 'AUTH_ERROR'; // 权限错误
