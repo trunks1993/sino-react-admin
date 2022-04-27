@@ -6,10 +6,11 @@
 import { all, call, spawn } from 'redux-saga/effects';
 
 import { saga as frameSaga } from './frame';
+import { saga as systemMenuSaga } from './system/menu';
 
 export default function* rootSaga() {
 
-  const sagas = [frameSaga];
+  const sagas = [frameSaga, systemMenuSaga];
 
   const spawns = sagas.map(saga => spawn(function* () {
     while (true) {

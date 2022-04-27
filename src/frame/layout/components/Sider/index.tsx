@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Menu, Layout, MenuProps } from 'antd';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
@@ -13,8 +13,11 @@ import { Skeleton } from 'antd';
 import { join, reverse } from 'lodash-es';
 
 const { Sider } = Layout;
-
-type SiderMenu = AuthMenu | ItemType;
+interface ExPerportyType {
+  label?: string;
+  key?: string;
+  icon?: React.ReactNode;
+}
 
 export default () => {
   const dispatch = useDispatch();
@@ -24,13 +27,13 @@ export default () => {
   const loadingAuthMenu = useSelector(({ frameState }: ConnectState) => frameState.loadingAuthMenu);
 
   const authMenu = useSelector(({ frameState }: ConnectState) => {
-    const { draft } = extractTree<SiderMenu>(frameState.authMenu, 'children', ['label', 'key', 'icon'], (item: any) => ({
-      label: item.name,
-      key: item.path,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      icon: React.createElement(Icon[item.source]),
-    }));
+    const { draft } = extractTree<AuthMenu, ExPerportyType>(frameState.authMenu, 'children', ['label', 'key', 'icon'], item => {
+      return {
+        label: item.name,
+        key: item.path,
+        icon: React.createElement((Icon as any)[item?.source || '']),
+      };
+    });
     return draft;
   });
 

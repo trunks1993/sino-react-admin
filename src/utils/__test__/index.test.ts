@@ -68,9 +68,7 @@ describe('extractTree函数测试', () => {
       },
     ];
 
-    const addAttr = (item: any) => ({ label: item.name, key: item.path });
-
-    const { draft } = extractTree<Menu>(tree, 'children', ['label', 'key'], addAttr);
+    const { draft } = extractTree<Menu, { label?: string; key?: string}>(tree, 'children', ['label', 'key'], item => ({ label: item.name, key: item.path }));
     expect(draft).toEqual(draftTree);
   });
 });

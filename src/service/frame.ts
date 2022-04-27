@@ -3,9 +3,9 @@
  * @Date: 2022-04-19 00:31:38
  * @LastEditTime: 2022-04-23 21:36:10
  */
-import { LoginParams } from '@/models/frame';
 import request from '@/utils/request';
 import md5 from 'js-md5';
+import { LoginParams } from '@/models/frame';
 
 /**
  * @description: 登录

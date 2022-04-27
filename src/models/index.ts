@@ -5,6 +5,7 @@
  */
 
 import { FrameState } from './frame';
+import { MenuState as SystemMenuState } from './system/menu';
 
 export type Response<T> = [boolean, T | undefined];
 export interface Page<T> {
@@ -14,4 +15,5 @@ export interface Page<T> {
 }
 export interface ConnectState {
   frameState: FrameState;
+  systemMenuState: SystemMenuState;
 }

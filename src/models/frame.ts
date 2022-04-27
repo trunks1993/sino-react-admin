@@ -51,6 +51,7 @@ export interface AuthInfo {
 export interface Menu {
   id?: string;
   name?: string;
+  source?: string;
   path?: string;
   category?: MenuCategory.parent | MenuCategory.child;
   hasChildren?: boolean;

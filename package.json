@@ -85,7 +85,7 @@
     "webpackbar": "^5.0.2"
   },
   "dependencies": {
-    "antd": "^4.20.0-alpha.1",
+    "antd": "^4.20.0",
     "immer": "^9.0.12",
     "js-base64": "^3.7.2",
     "js-cookie": "^3.0.1",

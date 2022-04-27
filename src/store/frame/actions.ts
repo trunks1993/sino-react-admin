@@ -1,101 +1,65 @@
 import { LoginParams, Menu, AuthInfo } from '@/models/frame';
-// import { Menu } from 'antd';
+import { BaseAction } from '@/store';
 
-// sider collapase
-export const FRAME_SIDER_COLLAPSE = 'FRAME_SIDER_COLLAPSE';
-
-// 登录
-export const FRAME_LOGIN = 'FRAME_LOGIN';
-export const FRAME_LOGIN_SUCCESS = 'FRAME_LOGIN_SUCCESS';
-export const FRAME_LOGIN_FAIL = 'FRAME_LOGIN_FAIL';
-
-// 登出
-export const FRAME_LOGOUT = 'FRAME_LOGOUT';
-
-// 菜单
-export const FRAME_MENU = 'FRAME_MENU';
-export const FRAME_MENU_SUCCESS = 'FRAME_MENU_SUCCESS';
-export const FRAME_MENU_FAIL = 'FRAME_MENU_FAIL';
-export const FRAME_MENU_CLEAR = 'FRAME_MENU_CLEAR';
-
-// action接口
-export interface SiderCollapseAction {
-  type: typeof FRAME_SIDER_COLLAPSE;
+export enum ActionType {
+  SiderCollapse = 'frame/SIDER_COLLAPSE',
+  Login = 'frame/LOGIN',
+  LoginSuccess = 'frame/LOGIN_SUCCESS',
+  LoginFail = 'frame/LOGIN_FAIL',
+  Logout = 'frame/LOGOUT',
+  AuthMenu = 'frame/AUTH_MENU',
+  AuthMenuSuccess = 'frame/AUTH_MENU_SUCCESS',
+  AuthMenuFail = 'frame/AUTH_MENU_FAIL',
+  AuthMenuClear = 'frame/AUTH_MENU_CLEAR',
 }
 
-export interface LogoutAction {
-  type: typeof FRAME_LOGOUT;
-}
-
-export interface LoginAction {
-  type: typeof FRAME_LOGIN;
-  payload: LoginParams;
-}
-
-export interface LoginFailAction {
-  type: typeof FRAME_LOGIN_FAIL;
-}
-
-export interface LoginSuccessAction {
-  type: typeof FRAME_LOGIN_SUCCESS;
-  payload: AuthInfo;
-}
-
-export interface MenuAction {
-  type: typeof FRAME_MENU;
-}
-
-export interface MenuSuccessAction {
-  type: typeof FRAME_MENU_SUCCESS;
-  payload: Menu[];
-}
-
-export interface MenuFailAction {
-  type: typeof FRAME_MENU_FAIL;
-}
-
-export interface MenuClearAction {
-  type: typeof FRAME_MENU_CLEAR;
-}
-
-export type FrameAction = SiderCollapseAction | LoginAction | LoginSuccessAction | LogoutAction | LoginFailAction | MenuFailAction | MenuClearAction | MenuSuccessAction | MenuAction;
+export type FrameAction =
+  BaseAction<ActionType.SiderCollapse>
+  | BaseAction<ActionType.Login, LoginParams>
+  | BaseAction<ActionType.LoginSuccess, AuthInfo>
+  | BaseAction<ActionType.LoginFail>
+  | BaseAction<ActionType.Logout>
+  | BaseAction<ActionType.AuthMenu>
+  | BaseAction<ActionType.AuthMenuSuccess, Menu[]>
+  | BaseAction<ActionType.AuthMenuFail>
+  | BaseAction<ActionType.AuthMenuClear>;
 
 // action api
-export const getSiderCollapseAction = (): SiderCollapseAction => ({
-  type: FRAME_SIDER_COLLAPSE,
+export const getSiderCollapseAction = (): BaseAction<ActionType.SiderCollapse> => ({
+  type: ActionType.SiderCollapse,
 });
 
-export const getLoginAction = (payload: LoginParams): LoginAction => ({
-  type: FRAME_LOGIN,
+export const getLoginAction = (payload: LoginParams): BaseAction<ActionType.Login, LoginParams> => ({
+  type: ActionType.Login,
   payload,
 });
 
-export const getLogoutAction = (): LogoutAction => ({
-  type: FRAME_LOGOUT,
-});
-
-export const getLoginSuccessAction = (payload: AuthInfo): LoginSuccessAction => ({
-  type: FRAME_LOGIN_SUCCESS,
+export const getLoginSuccessAction = (payload: AuthInfo): BaseAction<ActionType.LoginSuccess, AuthInfo> => ({
+  type: ActionType.LoginSuccess,
   payload
 });
 
-export const getLoginFailAction = (): LoginFailAction => ({
-  type: FRAME_LOGIN_FAIL,
+export const getLoginFailAction = (): BaseAction<ActionType.LoginFail> => ({
+  type: ActionType.LoginFail,
 });
 
-export const getMenuAction = (): MenuAction => ({
-  type: FRAME_MENU,
+export const getLogoutAction = (): BaseAction<ActionType.Logout> => ({
+  type: ActionType.Logout,
 });
 
-export const getMenuSuccessAction = (payload: Menu[]): MenuSuccessAction => ({
-  type: FRAME_MENU_SUCCESS,
+export const getAuthMenuAction = (): BaseAction<ActionType.AuthMenu> => ({
+  type: ActionType.AuthMenu,
+});
+
+export const getAuthMenuSuccessAction = (payload: Menu[]): BaseAction<ActionType.AuthMenuSuccess, Menu[]> => ({
+  type: ActionType.AuthMenuSuccess,
   payload,
 });
 
-export const getMenuFailAction = (): MenuFailAction => ({
-  type: FRAME_MENU_FAIL,
+export const getAuthMenuFailAction = (): BaseAction<ActionType.AuthMenuFail> => ({
+  type: ActionType.AuthMenuFail,
 });
 
-export const getMenuClearAction = (): MenuClearAction => ({
-  type: FRAME_MENU_CLEAR,
+export const getAuthMenuClearAction = (): BaseAction<ActionType.AuthMenuClear> => ({
+  type: ActionType.AuthMenuClear,
 });

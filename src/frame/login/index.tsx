@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLoginAction, getMenuAction } from '@/store/frame/actions';
+import { getLoginAction } from '@/store/frame/actions';
 import { useNavigate } from 'react-router-dom';
 import { ConnectState } from '@/models';
 import { Button, Form, Input } from 'antd';
@@ -21,10 +21,6 @@ const Login: React.FC = () => {
 
   const handleLogin = (paramas: LoginParams) => {
     dispatch(getLoginAction(paramas));
-  };
-
-  const handleMenu = () => {
-    dispatch(getMenuAction());
   };
 
   return (

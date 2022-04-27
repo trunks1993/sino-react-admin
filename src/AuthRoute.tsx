@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { ConnectState } from './models';
-import { getLogoutAction, getMenuAction } from './store/frame/actions';
+import { getLogoutAction, getAuthMenuAction } from './store/frame/actions';
 import { extractTree } from './utils';
 import { getAuthInfo, hasAuth } from './utils/auth';
 import { Button, Result } from 'antd';
@@ -29,7 +29,7 @@ const AuthRoute: React.FC<AuthRouteProps> = ({ children }) => {
     // 如果token不存则则退出登录
     if (!access_token) dispatch(getLogoutAction());
     // 菜单数据为空则拉取菜单
-    if (!authMenu.length) dispatch(getMenuAction());
+    if (!authMenu.length) dispatch(getAuthMenuAction());
   }, [location.pathname]);
 
   const result = (

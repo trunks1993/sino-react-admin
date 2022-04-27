@@ -6,9 +6,11 @@
 import { combineReducers } from 'redux';
 
 import { reducer as frameState } from './frame';
+import { reducer as systemMenuState } from './system/menu';
 
 const rootReducer = combineReducers({
   frameState,
+  systemMenuState,
 });
 
 export default rootReducer;

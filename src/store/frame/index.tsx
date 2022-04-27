@@ -1,7 +1,7 @@
 import { FrameState, AuthInfo, Menu } from '@/models/frame';
 import produce from 'immer';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { FrameAction, getLoginSuccessAction, LoginAction, FRAME_SIDER_COLLAPSE, FRAME_LOGIN, FRAME_LOGIN_SUCCESS, FRAME_MENU, FRAME_LOGOUT, FRAME_LOGIN_FAIL, getLoginFailAction, getMenuSuccessAction, getMenuFailAction, FRAME_MENU_SUCCESS, FRAME_MENU_FAIL, FRAME_MENU_CLEAR, getMenuClearAction } from './actions';
+import { ActionType, FrameAction, getLoginSuccessAction, getLoginFailAction, getAuthMenuClearAction, getAuthMenuFailAction, getAuthMenuSuccessAction } from './actions';
 import { Response } from '@/models';
 import { login, fetchMenu } from '@/service/frame';
 import { getAuthInfo, setAuthInfo, removeAuthInfo } from '@/utils/auth';
@@ -17,40 +17,40 @@ const initialState: FrameState = {
 const reducer = (state = initialState, action: FrameAction) => produce(state, draft => {
   const { type } = action;
   switch (type) {
-    case FRAME_SIDER_COLLAPSE:
+    case ActionType.SiderCollapse:
       draft.siderCollapsed = !state.siderCollapsed;
       break;
-    case FRAME_LOGIN:
+    case ActionType.Login:
       draft.loadingGlobal = true;
       break;
-    case FRAME_LOGIN_SUCCESS:
+    case ActionType.LoginSuccess:
       draft.loadingGlobal = false;
-      draft.authInfo = action.payload;
+      draft.authInfo = action.payload as AuthInfo;
       break;
-    case FRAME_LOGOUT:
+    case ActionType.Logout:
       draft.authInfo = {};
       break;
-    case FRAME_LOGIN_FAIL:
+    case ActionType.LoginFail:
       draft.loadingGlobal = false;
       break;
-    case FRAME_MENU:
+    case ActionType.AuthMenu:
       draft.loadingAuthMenu = true;
       break;
-    case FRAME_MENU_SUCCESS:
+    case ActionType.AuthMenuSuccess:
       draft.loadingAuthMenu = false;
-      draft.authMenu = action.payload;
+      draft.authMenu = action.payload as Menu[];
       break;
-    case FRAME_MENU_FAIL:
+    case ActionType.AuthMenuFail:
       draft.loadingAuthMenu = false;
       break;
-    case FRAME_MENU_CLEAR:
+    case ActionType.AuthMenuClear:
       draft.authMenu = [];
       break;
   }
 });
 
 // 异步调用api
-function* loginByUsername(action: LoginAction) {
+function* loginByUsername(action: FrameAction) {
   const [success, data]:Response<AuthInfo> = yield call(login, action.payload);
   if (!success || !data?.access_token){
     yield put(getLoginFailAction());
@@ -60,26 +60,26 @@ function* loginByUsername(action: LoginAction) {
   yield put(getLoginSuccessAction(data));
 }
 
-function* getMenu() {
+function* getAuthMenu() {
   const [success, data]:Response<Menu[]> = yield call(fetchMenu);
   if (!success || !data?.length) {
-    yield put(getMenuFailAction());
+    yield put(getAuthMenuFailAction());
     return;
   }
-  yield put(getMenuSuccessAction(data));
+  yield put(getAuthMenuSuccessAction(data));
 }
 
 function* logout() {
   yield removeAuthInfo();
-  yield put(getMenuClearAction());
+  yield put(getAuthMenuClearAction());
 }
 
 // 此模块的saga处理函数
 function* saga() {
   yield all([
-    takeLatest(FRAME_MENU, getMenu),
-    takeLatest(FRAME_LOGIN, loginByUsername),
-    takeLatest(FRAME_LOGOUT, logout),
+    takeLatest(ActionType.AuthMenu, getAuthMenu),
+    takeLatest(ActionType.Login, loginByUsername),
+    takeLatest(ActionType.Logout, logout),
   ]);
 }
 
