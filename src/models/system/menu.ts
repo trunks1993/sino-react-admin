@@ -10,3 +10,7 @@ export interface MenuState {
   queryParams: QueryParams;
   list: Menu[];
 }
+
+export interface RemoveParams {
+  ids: string;
+}

@@ -1,8 +1,3 @@
-/*
- * @Author: wangzhijian
- * @Date: 2022-04-06 22:20:57
- * @LastEditTime: 2022-04-23 18:24:27
- */
 import React, { Suspense } from 'react';
 import ReactDOMClient from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -20,7 +15,9 @@ if (module && module.hot) {
 
 const container: any = document.getElementById('root');
 // 新 createRoot API 暂时没有声明使用any
-ReactDOMClient.createRoot(container).render(
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
   <Provider store={store}>
     <Suspense fallback={<Spin />}>
       <App />

@@ -42,7 +42,7 @@ const AuthRoute: React.FC<AuthRouteProps> = ({ children }) => {
   );
 
   return <>
-    {!access_token ? <Navigate to="/login" replace /> : auth ? children : result}
+    {!access_token ? <Navigate to="/login" replace /> : children}
   </>;
 };
 

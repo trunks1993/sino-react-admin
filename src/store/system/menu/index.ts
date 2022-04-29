@@ -25,6 +25,9 @@ const reducer = (state = initialState, action: MenuAction) => produce(state, dra
     case ActionType.ListFail:
       draft.loading = false;
       break;
+    case ActionType.QueryParams:
+      draft.queryParams = action.payload;
+      break;
   }
 });
 

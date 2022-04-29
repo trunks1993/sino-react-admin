@@ -85,6 +85,9 @@ export default {
             loader: 'less-loader',
             options: {
               sourceMap: !isProd,
+              lessOptions: {
+                javascriptEnabled: true,
+              },
             }
           }
         ]

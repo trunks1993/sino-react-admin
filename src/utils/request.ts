@@ -25,7 +25,7 @@ const errorHandler = (error: Error) => {
  */
 const request = extend({
   // 开发环境下动态切换线上和mock环境
-  prefix: process.env.NODE_ENV === 'production' ? process.env.BASE_API : '/mock',
+  prefix: process.env.NODE_ENV === 'production' ? process.env.BASE_API : '/api',
   errorHandler, // 默认错误处理
   credentials: 'omit', // 默认请求是否带上cookie
   timeout: 10000,

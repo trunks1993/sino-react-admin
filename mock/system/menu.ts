@@ -1,19 +1,7 @@
 import { Request, Response } from 'express';
 
 export default {
-  'POST /sino-auth/oauth/token': (req: Request, res: Response) => {
-    setTimeout(() => {
-      res.send(JSON.stringify({
-        code: 200,
-        data: {
-          access_token: '1223',
-          nick_name: '测试',
-        },
-        msg: 'success'
-      }));
-    }, 1000);
-  },
-  'GET /sino-system/menu/routes': (req: Request, res: Response) => {
+  'GET /sino-system/menu/list': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send(JSON.stringify({
         code: 200,
@@ -24,6 +12,7 @@ export default {
           path: 'system',
           hasChildren: true,
           category: 1,
+          sort: 1,
           source: 'SettingOutlined',
           children: [
             {
@@ -34,6 +23,7 @@ export default {
               hasChildren: false,
               source: 'MenuOutlined',
               category: 1,
+              sort: 2,
             },
             {
               id: '22223',
@@ -43,6 +33,7 @@ export default {
               hasChildren: false,
               source: 'UserOutlined',
               category: 1,
+              sort: 3,
             }
           ]
         }],
@@ -50,4 +41,22 @@ export default {
       }));
     }, 1000);
   },
+  'POST /sino-system/menu/submit': (req: Request, res: Response) => {
+    setTimeout(() => {
+      res.send(JSON.stringify({
+        code: 200,
+        data: {},
+        msg: 'success'
+      }));
+    }, 1000);
+  },
+  'POST /sino-system/menu/remove': (req: Request, res: Response) => {
+    setTimeout(() => {
+      res.send(JSON.stringify({
+        code: 200,
+        data: {},
+        msg: 'success'
+      }));
+    }, 1000);
+  }
 };

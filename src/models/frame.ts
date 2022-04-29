@@ -56,5 +56,6 @@ export interface Menu {
   category?: MenuCategory.parent | MenuCategory.child;
   hasChildren?: boolean;
   parentId?: string;
+  sort?: number;
   children?: Menu[];
 }
