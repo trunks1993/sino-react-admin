@@ -1,13 +1,10 @@
-export default (moduleName: string, name: string) => {
-  const _name = name.replace(name[0], name[0].toUpperCase());
-
-  return `import React, { useRef, useState } from 'react';
-import { QueryParams, RemoveParams } from '@/models/${moduleName}/${name}';
+import React, { useRef, useState } from 'react';
+import { QueryParams, RemoveParams } from '@/models/content/article';
 import ProCard from '@ant-design/pro-card';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import * as Icon from '@ant-design/icons';
-import { ${_name} } from '@/models/${moduleName}/${name}';
-import { fetchList, remove } from '@/service/${moduleName}/${name}';
+import { Article } from '@/models/content/article';
+import { fetchList, remove } from '@/service/content/article';
 import { Button, message, Popconfirm } from 'antd';
 // import ModalSubmit from './components/ModalSubmit';
 
@@ -15,9 +12,9 @@ const { PlusOutlined } = Icon;
 
 export default () => {
 
-  const [editSubmitData, setEditSubmitData] = useState<null | ${_name}>(null);
+  const [editSubmitData, setEditSubmitData] = useState<null | Article>(null);
 
-  const columns: ProColumns<${_name}>[] = [
+  const columns: ProColumns<Article>[] = [
     {
       title: 'id',
       dataIndex: 'id',
@@ -99,6 +96,4 @@ export default () => {
       </ProCard>
     </>
   );
-};
-`;
 };

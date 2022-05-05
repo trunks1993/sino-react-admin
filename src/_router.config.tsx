@@ -6,6 +6,7 @@ import Page404 from '@/frame/404';
 import AuthRoute from './AuthRoute';
 import SystemMenu from '@/pages/system/menu';
 import SystemRole from '@/pages/system/role';
+import ContentArticle from '@/pages/content/article';
 
 const Routes = () => {
   const element = useRoutes([
@@ -16,6 +17,10 @@ const Routes = () => {
     {
       element: <Layout />,
       children: [
+        {
+          path: '*',
+          element: <Page404 />,
+        },
         {
           path: '/system/menu',
           element: (
@@ -33,8 +38,12 @@ const Routes = () => {
           ),
         },
         {
-          path: '*',
-          element: <Page404 />,
+          path: '/content/article',
+          element: (
+            <AuthRoute>
+              <ContentArticle />
+            </AuthRoute>
+          ),
         },
       ],
     },

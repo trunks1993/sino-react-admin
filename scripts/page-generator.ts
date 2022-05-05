@@ -10,6 +10,9 @@ import mkdirp from 'mkdirp';
 import signale from 'signale';
 import inquirer from 'inquirer';
 import getPage from './temp/getPage';
+import getService from './temp/getService';
+import getModel from './temp/getModel';
+import getMock from './temp/getMock';
 
 (async() => {
   // const args = yParser(process.argv);
@@ -57,9 +60,15 @@ import getPage from './temp/getPage';
   }
 
   const pageIndexPath = join(__dirname, '../src/pages', moduleName, name, 'index.tsx');
+  const modelIndexPath = join(__dirname, '../src/models', moduleName, `${name}.ts`);
+  const serviceIndexPath = join(__dirname, '../src/service', moduleName, `${name}.ts`);
+  const mockIndexPath = join(__dirname, '../mock', moduleName, `${name}.ts`);
 
   if (!isSelect || isSelect === undefined) {
     await mkdirp(join(__dirname, '../src/pages', moduleName));
+    await mkdirp(join(__dirname, '../src/models', moduleName));
+    await mkdirp(join(__dirname, '../src/service', moduleName));
+    await mkdirp(join(__dirname, '../mock', moduleName));
   }
 
   // 判断page是否存在
@@ -67,15 +76,20 @@ import getPage from './temp/getPage';
     return signale.error('page is already exsist.');
   }
 
-  console.log('test', join(pageIndexPath, '..'));
   // 存在则不创建 不存的话创建dir
   await mkdirp(join(pageIndexPath, '..'));
+  // await mkdirp(join(serviceIndexPath, '..'));
+  // await mkdirp(join(modelIndexPath, '..'));
+  // await mkdirp(mockIndexPath);
 
   // 写入数据
-  writeFileSync(pageIndexPath, getPage(name));
+  writeFileSync(pageIndexPath, getPage(moduleName, name));
+  writeFileSync(modelIndexPath, getModel(name));
+  writeFileSync(serviceIndexPath, getService(moduleName, name));
+  writeFileSync(mockIndexPath, getMock(name));
 
   const newRoute = {
-    path: name,
+    path: `/${moduleName}/${name}`,
     parent: '/' + moduleName,
     element: '',
   };

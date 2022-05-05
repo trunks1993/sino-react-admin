@@ -45,6 +45,27 @@ export default {
               category: 1,
             }
           ]
+        }, {
+          id: '123456',
+          parentId: '-1',
+          name: '内容管理',
+          path: 'content',
+          hasChildren: true,
+          category: 1,
+          sort: 1,
+          source: 'SettingOutlined',
+          children: [
+            {
+              id: '654321',
+              parentId: '123456',
+              name: '内容列表',
+              path: 'article',
+              hasChildren: false,
+              source: 'MenuOutlined',
+              category: 1,
+              sort: 2,
+            },
+          ]
         }],
         msg: 'success'
       }));

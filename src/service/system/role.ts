@@ -1,5 +1,5 @@
+import { Role, QueryParams, RemoveParams, AuthGrantParams } from '@/models/system/role';
 import request from '@/utils/request';
-import { Role, QueryParams, RemoveParams, RoleGrantParams } from '@/models/system/role';
 
 export const fetchList = (params: QueryParams) => request('/sino-system/role/list', {
   method: 'GET',
@@ -16,12 +16,12 @@ export const remove = (params: RemoveParams) => request('/sino-system/role/remov
   params
 });
 
-export const getAuthMenuKeys = (params: { roleIds: string }) => request('/sino-system/menu/role-tree-keys', {
+export const fetchAuthMenuKeys = (params: { roleIds: string }) => request('/sino-system/menu/role-tree-keys', {
   method: 'GET',
   params
 });
 
-export const grant = (data: RoleGrantParams) => request('/sino-system/role/grant', {
+export const grant = (data: AuthGrantParams) => request('/sino-system/role/grant', {
   method: 'POST',
   data: {
     ...data,

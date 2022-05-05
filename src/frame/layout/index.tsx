@@ -72,7 +72,7 @@ const Container = () => {
       menuItemRender={(item: any, dom: any) => (
         <a
           onClick={() => {
-            navigate(item.path || '/welcome');
+            navigate(item.path);
           }}
         >
           {item.icon}

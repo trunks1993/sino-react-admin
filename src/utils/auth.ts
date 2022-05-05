@@ -36,7 +36,7 @@ export function hasAuth(authMenu: Menu[] = [], pathname = '/'): boolean {
     const id = currentRoute?.id;
     // 如果pid不存在说明是第一次遍历
     // 则直接把当前id设为顶层路径pid
-    // 如果无顶层id 则直接设为无权限false
+    // 如果无顶层id 直接设为无权限false
     if (!pid) {
       if (!id) hasAuth = false;
       else return id;

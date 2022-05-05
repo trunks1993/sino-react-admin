@@ -44,18 +44,15 @@ export function getNewRouteCode(newRoute: NewRoute, configPath: string) {
           lastImportIndex = index;
         }
       });
-      console.log('lastImportIndex', lastImportIndex);
       body.splice(lastImportIndex + 1, 0, getImportDeclarationAst(newRoute));
     },
     ObjectExpression({ node }) {
       const { properties } = node;
       properties.forEach(p => {
-        const { key, value }: any = p;
-        if (t.isObjectProperty(p) && t.isIdentifier(key) && key.name === 'path') {
-          if (newRoute.parent === value.value) {
-            const pp: any = properties.find(cp => t.isObjectProperty(cp) && t.isIdentifier(cp.key) && cp.key.name === 'children');
-            routesNode = pp.value;
-          }
+        const { key }: any = p;
+        if (t.isObjectProperty(p) && t.isIdentifier(key) && key.name === 'element') {
+          const pp: any = properties.find(cp => t.isObjectProperty(cp) && t.isIdentifier(cp.key) && cp.key.name === 'children');
+          if (pp) routesNode = pp.value;
         }
       });
     },
@@ -116,16 +113,22 @@ function generateCode(ast: any) {
  * @param {*} name
  */
 function getJsxElementAst(newRoute: NewRoute) {
-  const _name = upperCaseFirstLetter(newRoute.parent + upperCaseFirstLetter(newRoute.path));
-
+  const _name = newRoute.path.split('/').filter(item => !!item).map(item => upperCaseFirstLetter(item)).join('');
   // const attrname = t.jsxIdentifier('test');
   // const source = t.stringLiteral('1');
   // const attr = t.jsxAttribute(attrname, source);
+  const authNodeName = t.jsxIdentifier('AuthRoute');
+
+  const openingElement = t.jsxOpeningElement(authNodeName, []);
+  const closingElement = t.jsxClosingElement(authNodeName);
+
   const nodeName = t.jsxIdentifier(_name);
 
-  const openingElement = t.jsxOpeningElement(nodeName, [], true);
+  const openingNodeElement = t.jsxOpeningElement(nodeName, [], true);
 
-  return t.jSXElement(openingElement, null, [], true);
+  const nodeJsxElement = t.jSXElement(openingNodeElement, null, [], true);
+
+  return t.jSXElement(openingElement, closingElement, [nodeJsxElement], true);
 }
 
 /**
@@ -133,10 +136,11 @@ function getJsxElementAst(newRoute: NewRoute) {
  * @param {*} name
  */
 function getImportDeclarationAst(newRoute: NewRoute) {
-  const path = '/pages' + newRoute.parent + '/' + newRoute.path;
+  const path = '/pages' + newRoute.path;
   // const name = newRoute.path;
-  const _name = upperCaseFirstLetter(newRoute.parent + upperCaseFirstLetter(newRoute.path));
-  console.log('_name', _name);
+  // const _name = upperCaseFirstLetter(newRoute.parent + upperCaseFirstLetter(newRoute.path));
+  const _name = newRoute.path.split('/').filter(item => !!item).map(item => upperCaseFirstLetter(item)).join('');
+
   const local = t.identifier(_name);
   // const imported = t.Identifier(_name);
   const specifiers = [t.importDefaultSpecifier(local)];

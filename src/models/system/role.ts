@@ -14,7 +14,7 @@ export interface Role {
   roleAlias?: string;
 }
 
-export interface RoleGrantParams {
+export interface AuthGrantParams {
   menuIds?: string[];
   roleIds?: string[];
 }

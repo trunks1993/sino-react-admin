@@ -1,8 +1,10 @@
 import { extend } from 'umi-request';
 import { Base64 } from 'js-base64';
-import { whiteUrls, AUTH_KEY, getToken, CustomHeader, CLIENT_SECRET, CLIENT_ID, API_LOGIN, getAuthInfo } from './auth';
+import { whiteUrls, AUTH_KEY, getToken, removeAuthInfo ,CustomHeader, CLIENT_SECRET, CLIENT_ID, API_LOGIN, getAuthInfo } from './auth';
 import { AppError, AUTH_ERROR, code2Message, HTTP_ERROR, HTTP_SUCCESS, RESPONSE_ERROR } from './appError';
 import { notification } from 'antd';
+import store from '@/store';
+import { getLogoutAction } from '@/store/frame/actions';
 
 /**
  * 异常处理程序
@@ -14,7 +16,7 @@ const errorHandler = (error: Error) => {
 
   if (error.name === AUTH_ERROR) {
     // 清除token重新登录
-    console.log('error.name', error.name);
+    store.dispatch(getLogoutAction());
   }
 
   return Promise.resolve([false]);
